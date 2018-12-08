@@ -1,12 +1,22 @@
-import { Component } from 'react';
+import React, { PureComponent } from 'react';
+import './cell.css';
 
-render(){
-    return {
 
-        <div className="cell" owner=""></div>
-        
+class Cell extends PureComponent {
+	state = {}
 
-    }
+	handleClick = (event) => {
+		this.props.cellClick(this.props)
+	}
+	render(){
+		return (
+
+		    	<div className="cell" onClick={this.handleClick} ></div>
+			)
+		
+	}
 }
 
-export default cell;
+
+
+export default Cell;
