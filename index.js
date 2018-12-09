@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Game from './src/board/containers/game';
+import Game from './src/containers/game';
 import data from './src/api.json';
 
 import { Provider } from 'react-redux';

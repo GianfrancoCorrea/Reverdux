@@ -1,0 +1,15 @@
+.board {
+	max-width: 400px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-column-gap: 0px;
+
+}
+
+.board__row {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	  grid-column-gap: 0px;
+
+}
