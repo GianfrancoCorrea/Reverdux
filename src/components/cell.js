@@ -18,12 +18,12 @@ class Cell extends PureComponent {
 
 		    	<div 
 					style={styles}
-					className="board__cell" onClick={this.handleClick} ></div>
+					className="board__cell" onClick={this.handleClick} >{this.props.cell} -- {this.props.owner}</div>
 			)
 
 	function ownerStyle(owner) {
 		if(owner == 1){
-			return {background: 'black'}
+			return {background: 'black', color: 'white'}
 		} else if(owner == 2) {
 			return {background: 'white'}
 		} else return {background: 'lightgreen'}

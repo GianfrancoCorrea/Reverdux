@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 
 class Game extends Component {
   state = {
-	  board: []
+	  board: [],
+	  turn: 0,
   }
   newBoard = () => 
   ([0, 0, 0, 0, 0, 0, 0, 0,
@@ -24,6 +25,7 @@ class Game extends Component {
 	newGame = () => {
 		//newBoard
 		this.setState({board: this.newBoard()})
+		this.setState({turn: 1})
 		setTimeout(() => {
 			console.log(this.state)
 		},0)
@@ -32,9 +34,22 @@ class Game extends Component {
 	handlePlay = () => {
 		this.newGame()
 	}
+	changeBoard = (cell, playerTurn) => {
+		this.setState(prevState => ({cacheCells: [...prevState.cacheCells[cell], playerTurn]}))
+	}
+	changeTurn = () => {
+		if(this.state.turn == 1){
+			this.setState({turn: 2})
+		} else { this.setState({turn: 1})}
+	}
 	render() {
 		return (
-		 	<Board handlePlay={this.handlePlay} board={this.state.board}/>
+		 	<Board 
+			 	handlePlay={this.handlePlay} 
+			 	board={this.state.board}
+				playerTurn={this.state.turn}
+				changeTurn={this.changeTurn}
+			 />
 		)
 	}
 }
