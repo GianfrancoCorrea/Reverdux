@@ -5,54 +5,81 @@ import Board from '../containers/board';
 
 
 import { connect } from 'react-redux';
-
-
+// import reversiApp from '../reducers/game'
 class Game extends Component {
   state = {
 	  board: [],
 	  turn: 0,
   }
-  newBoard = () => 
-  ([0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 1, 2, 0, 0, 0,
-	0, 0, 0, 2, 1, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0])
+ 
 	
 	newGame = () => {
 		//newBoard
-		this.setState({board: this.newBoard()})
-		this.setState({turn: 1})
+		//this.setState({board: this.newBoard()})
+		//this.setState({turn: 1})
+
 		setTimeout(() => {
 			console.log(this.state)
 		},0)
 
 	}
 	handlePlay = () => {
-		this.newGame()
+		//this.newGame()
+		this.props.dispatch({
+			type: 'NEW_GAME',
+
+		})
 	}
 	changeBoard = (cell, playerTurn) => {
 		this.setState(prevState => ({cacheCells: [...prevState.cacheCells[cell], playerTurn]}))
 	}
-	changeTurn = () => {
-		if(this.state.turn == 1){
-			this.setState({turn: 2})
-		} else { this.setState({turn: 1})}
-	}
+	
 	render() {
 		return (
 		 	<Board 
 			 	handlePlay={this.handlePlay} 
-			 	board={this.state.board}
+			 	board={this.props.board}
 				playerTurn={this.state.turn}
-				changeTurn={this.changeTurn}
+				changeTurn={this.props.changeTurn}
 			 />
 		)
 	}
+// 	const SWITCH_TURN = 'SWITCH_TURN'
+// const MAKE_MOVE = 'MAKE_MOVE'
+// const NEW_GAME = 'NEW_GAME'
+
+  reversiApp = (state = initialState, action) => {
+    switch (action.type) {
+        case NEW_GAME:
+          return Object.assign({}, state, {
+            board: this.newBoard()
+          })
+        case SWITCH_TURN:
+          return Object.assign({}, state, {
+            turn: action.switchTurn
+          })    
+        case MAKE_MOVE:
+        return action.makeMove
+        default:
+          return state
+        }
 }
 
+}
 
-export default Game
+// reduxTest(state, actions) {
+// 	 switch (actions) {
+//     case 'NEW_GAME':
+//       return newBoard()
+//     case default:
+//     	return state
+//   }
+// }
+const mapStateToProps = (state, props) => {
+  return {
+    board: state.board,
+    turn: state.turn
+  }
+}
+
+export default connect(mapStateToProps)(Game)
