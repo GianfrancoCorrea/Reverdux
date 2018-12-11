@@ -16,3 +16,12 @@ export const getCell = (row, col) => {
     return (row * 8) + col
 }
 
+export const ownerStyle = (owner, className) => {
+
+    if(owner == 1){
+        return `${className} ${className}--player1`
+    } else if(owner == 2) {
+        return `${className} ${className}--player2`
+    } else return `${className} `
+    // ${className}--none
+}

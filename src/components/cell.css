@@ -1,10 +1,57 @@
 .board__cell {
 	width: 50px;
 	height: 50px;
-	border: 3px solid #bbb;
+	border: 1px solid #bbb;
+	background: rgb(9, 148, 16);
+	/* animation: fade infinite 1s linear; */
 	/* background: lightgreen; */
 }
+.board__cell--player2 .token{
+	/* animation: fade 1s; */
+	background: white;
 
+}
+.board__cell--player1 .token{
+	/* animation: fade 1s; */
+	background: black;
+}
+.board__cell--player1 .token, .board__cell--player2 .token {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	/* border: 1px solid #ccc; */
+	box-shadow: 1px 2px 2px rgb(0,0,0,.3);
+	/* transform-style: preserve-3d; */
+  	transition: all .35s linear;
+	
+	
+	/* animation: fade 1s linear; */
+
+}
+/* .board__cell--none {
+	background: rgb(9, 148, 16);
+} */
+@keyframes fade {
+	0% {
+	  opacity: 0;
+	}
+	25% {
+	  opacity: 1;
+	}
+	50% {
+	  opacity: 0;
+	}
+	75% {
+	  opacity: 0;
+	}
+	90% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 1;
+	}
+  }
 
 /* .board__cell--one {}
 .board__cell--two {} */
+

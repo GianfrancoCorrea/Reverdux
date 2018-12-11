@@ -1,9 +1,10 @@
 .board {
-	max-width: 400px;
+	max-width: 409px;
 	margin: 0 auto;
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
-	grid-column-gap: 0px;
+	grid-template-columns: repeat(8, 50px);
+	grid-gap: 1px;
+	background: #fafafa;
 
 }
 

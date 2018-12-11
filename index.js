@@ -13,11 +13,9 @@ import { createStore } from 'redux';
 const container = document.getElementById('app')
 
 const initialState = {
-  data: {
-  	...data,
-  },
- color: 'white'
-  
+  board: [],
+  turn: 1,
+  score: []
 }
 
 const store = createStore(
@@ -26,7 +24,12 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+console.log(store.getState())
 
-render( <Provider>	
-	<Game store={store} />	
+
+
+
+render( 
+  <Provider>	
+	  <Game store={store} />	
 	</Provider>, container)
