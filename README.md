@@ -1,8 +1,10 @@
 
 ## Start
 
-npm install
-npm run build:dev
+1. npm install.
+
+2. npm run build:dev.
+
 
 ---
 
