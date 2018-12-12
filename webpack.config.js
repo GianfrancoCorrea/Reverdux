@@ -17,7 +17,7 @@ module.exports = (env) => {
   return {
 
     entry: {
-      reverdux: path.resolve(__dirname, '/index.js'),
+      reverdux: path.resolve(__dirname, 'index.js'),
     },
     output: {
       path: path.resolve(__dirname, 'dist'),

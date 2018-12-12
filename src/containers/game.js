@@ -12,8 +12,6 @@ import Button from '../buttons/components/button';
 
 class Game extends Component {
 
-
-
 	newGame = () => {
 		setTimeout(() => {
 			console.log(this.state)
@@ -75,14 +73,6 @@ class Game extends Component {
 
 }
 
-// reduxTest(state, actions) {
-// 	 switch (actions) {
-//     case 'NEW_GAME':
-//       return newBoard()
-//     case default:
-//     	return state
-//   }
-// }
 const mapStateToProps = (state, props) => {
   return {
      	board: state.board,
