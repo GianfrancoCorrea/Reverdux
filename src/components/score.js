@@ -10,13 +10,14 @@ function Score(props){
             <div className="score__title">Score</div>
             <div className="score__cont">
                 <div className="score__player ">
-                
-                Player1: <span>{props.score.player1}
+                <div className='coin score__player--one '></div>
+                Player1: <span> {props.score.player1}
                 </span> 
                 </div>
                 <div className="score__player ">
-                
-                    Player2: <span>{props.score.player2}
+                    <div className='coin score__player--two ' />
+
+                    Player2: <span> {props.score.player2}
                 </span> 
                 </div>
 
