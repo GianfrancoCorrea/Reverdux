@@ -1,5 +1,6 @@
 import React from 'react';
 import './score.css';
+import PropTypes from 'prop-types'
 
 
 function Score(props){
@@ -26,3 +27,9 @@ function Score(props){
 
 
 export default Score;
+
+
+Score.propTypes = {
+	score:  PropTypes.object.isRequired,
+	
+}

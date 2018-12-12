@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Board from '../containers/board';
-import AppLayout from '../components/app-layout'
-import Menu from '../components/menu'
-import GameLayout from '../components/game-layout'
-import Turn from '../components/turn'
-import Score from '../components/score'
+import AppLayout from '../components/app-layout';
+import Menu from '../components/menu';
+import GameLayout from '../components/game-layout';
+import Turn from '../components/turn';
+import Score from '../components/score';
 import { connect } from 'react-redux';
-
-import Button from '../buttons/components/button'
-
+import Button from '../buttons/components/button';
 
 
 class Game extends Component {
+
+
 
 	newGame = () => {
 		setTimeout(() => {
@@ -85,7 +85,7 @@ class Game extends Component {
 // }
 const mapStateToProps = (state, props) => {
   return {
-    board: state.board,
+     	board: state.board,
 		turn: state.turn,
 		showInitialScreen: state.showInitialScreen,
 		score: state.score,
@@ -94,3 +94,11 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps)(Game)
+
+Game.propTypes = {
+		board: PropTypes.array.isRequired,
+		pause:  PropTypes.bool.isRequired,
+		showInitialScreen: PropTypes.bool.isRequired,
+		turn: PropTypes.number.isRequired,
+		score: PropTypes.objectOf(PropTypes.number).isRequired,
+}

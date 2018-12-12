@@ -1,5 +1,4 @@
 import React from 'react';
-// import './app-layout.css';
 
 
 function GameLayout(props){

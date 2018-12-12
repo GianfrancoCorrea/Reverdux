@@ -1,8 +1,5 @@
 import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
-import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE} from '../actions/actionTypes'
-
-
-// actions
+import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE} from '../actions/actionTypes';
 
 
 function reversiApp(state = initialState, action) {
@@ -30,6 +27,10 @@ function reversiApp(state = initialState, action) {
           return state
         }
 }
+
+
+
+
 const handlerMove = (state, action) => {
   let board = state.board
   let turn = state.turn
@@ -40,7 +41,7 @@ const handlerMove = (state, action) => {
   let cellsToFlip = [];
   if(checkValidMove(board, clickedCell, turn)) {
       searchForSiblingsCells(row, col).map( sibling => {
-        if(isEnemy(board, sibling.row, sibling.col, turn)) {
+        if(isEnemy(board, sibling.cell, turn)) {
           if(checkLimits(sibling.row, sibling.col)) {
             //------------------------------------------------
             let initialCellToFlip = []
@@ -83,16 +84,13 @@ const searchForSiblingsCells = (clickedRow, clickedCol) => siblingsCells.map( (d
       return {row: newRow, col: newCol, directionIndex: directionIndex, cell: getCell(newRow, newCol)}
     })
 const checkSiblingCell = (board, clickedRow, clickedCol, turn) => {       
-  
-    //console.log(siblings)
-   
-    
+
   
 }
 
 const checkValidMove = (board, cell, turn) => {
         //if cellClicked has owner, cant move
-        if(board[cell] ==0){
+        if(board[cell] == 0){
             return true
          } 
 }
@@ -101,12 +99,12 @@ const checkValidMove = (board, cell, turn) => {
     // checkLimits (board borders)
     if (y < 0 || y > 7 || x < 0 || x > 7) {
         return false
-      } else return true
+      } 
+    return true
 }
-const isEnemy = (board, y, x, turn) => {
-  const siblingCell = getCell(y, x)
+const isEnemy = (board, siblingCell, turn) => {
+  // const siblingCell = getCell(y, x)
   const siblingOwner = board[siblingCell]
-  // debugger
   if( siblingOwner !== turn && siblingOwner !== 0){
       //enemy found
       return true

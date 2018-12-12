@@ -23,3 +23,8 @@ class Board extends Component {
 
 
 export default Board
+
+Board.propTypes = {
+	board:  PropTypes.arrayOf(PropTypes.number).isRequired,
+	cellClick: PropTypes.func.isRequired,
+}

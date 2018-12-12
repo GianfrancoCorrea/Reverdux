@@ -1,5 +1,7 @@
-import React from 'react'
-import './button.css'
+import React from 'react';
+import './button.css';
+import PropTypes from 'prop-types'
+
 
 function Button(props) {
   const className = 'btn btn__play btn__play--'+props.style
@@ -10,4 +12,9 @@ function Button(props) {
   )
 }
 
-export default Button
+export default Button;
+
+Button.propTypes = {
+	handleAction: PropTypes.func.isRequired,
+	style: PropTypes.string.isRequired,
+}

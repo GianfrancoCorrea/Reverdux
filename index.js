@@ -1,34 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Game from './src/containers/game';
-import data from './src/api.json';
-
 import { Provider } from 'react-redux';
-
-import { createStore } from 'redux';
-import reversiApp from './src/reducers/game'
+import store from './src/reducers/store';
 
 
 
 
 const container = document.getElementById('app')
 
-const initialState = {
-  board: [],
-  turn: 1,
-  score: {
-    player1: 0,
-    player2: 0,
-  },
-  showInitialScreen: true,
-  pause: false,
-}
 
-let store = createStore(
-  reversiApp,
-  initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
 console.log(store.getState())
 

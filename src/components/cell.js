@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ownerStyle } from '../libs/board-libs';
+import PropTypes from 'prop-types'
 
 import './cell.css';
 
@@ -35,3 +36,8 @@ class Cell extends PureComponent {
 
 
 export default Cell;
+
+Cell.propTypes = {
+	owner: PropTypes.number.isRequired,
+	cellClick: PropTypes.func,
+}

@@ -3,17 +3,23 @@
 	height: 50px;
 	border: 1px solid #bbb;
 	background: rgb(48, 148, 28);
-	/* animation: fade infinite 1s linear; */
-	/* background: lightgreen; */
 }
 .board__cell--player2 .token{
 	/* animation: fade 1s; */
-	background: white;
-
+	background-color: white;
+	/* background-image: url('../react.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%; */
 }
 .board__cell--player1 .token{
 	/* animation: fade 1s; */
-	background: black;
+	background-color: black;
+	/* background-image: url('../redux.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-y: 1px;
+	background-size: 95%; */
 }
 .board__cell--player1 .token, .board__cell--player2 .token {
 	width: 100%;
@@ -21,11 +27,8 @@
 	border-radius: 50%;
 	/* border: 1px solid #ccc; */
 	box-shadow: 1px 2px 2px rgb(0,0,0,.3);
-	/* transform-style: preserve-3d; */
   	transition: all .35s linear;
 	
-	
-	/* animation: fade 1s linear; */
 
 }
 /* .board__cell--none {
@@ -52,6 +55,5 @@
 	}
   }
 
-/* .board__cell--one {}
-.board__cell--two {} */
+
 

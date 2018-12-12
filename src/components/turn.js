@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+
 import './turn.css';
 
 
@@ -13,3 +15,8 @@ function Turn(props){
 
 
 export default Turn;
+
+Turn.propTypes = {
+	turn:  PropTypes.number.isRequired,
+
+}
