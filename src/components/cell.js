@@ -22,7 +22,7 @@ class Cell extends PureComponent {
 		    	<div 
 					className={className} 
 					onClick={this.handleClick} >
-						<div className='token'></div>
+						<div className='token'>{this.props.cell}</div>
 				</div>
 
 			)

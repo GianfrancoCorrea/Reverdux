@@ -25,3 +25,18 @@ export const ownerStyle = (owner, className) => {
     } else return `${className} `
     // ${className}--none
 }
+
+export const switchPlayer = (player) => {
+    //expect oneOf([1, 2])
+    return player == 1 ? 2 : 1
+}
+
+export const count = (arr, valor) => {
+    let counter = 0;
+    arr.map((currentValue, index) => {
+        if(arr[index] == valor){
+            counter++
+        }
+    }) 
+    return counter
+}

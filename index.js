@@ -16,7 +16,10 @@ const container = document.getElementById('app')
 const initialState = {
   board: [],
   turn: 1,
-  score: []
+  score: {
+    player1: 0,
+    player2: 0,
+  },
 }
 
 let store = createStore(
