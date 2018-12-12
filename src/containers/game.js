@@ -1,39 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Board from '../containers/board';
+import AppLayout from '../components/app-layout'
+import Menu from '../components/menu'
+import GameLayout from '../components/game-layout'
+import Turn from '../components/turn'
+import Score from '../components/score'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import * as actionCreators from '../actions/gameActions'
+import Button from '../buttons/components/button'
 
-// import reversiApp from '../reducers/game'
+
+
 class Game extends Component {
-  // state = {
-	//   board: [],
-	//   turn: 0,
-  // }
- 
-	
-	newGame = () => {
-		//newBoard
-		//this.setState({board: this.newBoard()})
-		//this.setState({turn: 1})
 
+	newGame = () => {
 		setTimeout(() => {
 			console.log(this.state)
 		},0)
-
 	}
 	handlePlay = () => {
-		//this.newGame()
 		this.props.dispatch({
 			type: 'NEW_GAME',
-
+		})
+	}
+	handlePause = () => {
+		this.props.dispatch({
+			type: 'PAUSE',
+			
 		})
 	}
 	handleCellClick = (eventData) => {
-		//Y * 7 + X = Board[cell]
-	//	console.log(eventData)
 		this.props.dispatch({
 			type: 'MAKE_MOVE',
 			cell: eventData.cell
@@ -42,13 +39,37 @@ class Game extends Component {
 	
 	render() {
 		return (
-		 	<Board 
-			 	handlePlay={this.handlePlay} 
-			 	board={this.props.board}
-				playerTurn={this.props.turn}
-				changeTurn={this.props.changeTurn}
-				cellClick={this.handleCellClick}
-			 />
+			<AppLayout >
+				{
+				this.props.showInitialScreen == true ? 
+					this.props.pause == false ? 
+						<Menu show={this.props.showInitialScreen}>
+							<Button handleAction={this.handlePlay} message="Play" style='success'/>
+						</Menu>
+					:
+						<Menu show={this.props.showInitialScreen}>
+							<Button handleAction={this.handlePause} message="Resume" style='success'/>
+							<Score score={this.props.score} />
+							<Button handleAction={this.handlePlay} message="Restart" style="danger"/>
+
+						</Menu>
+				
+				: 
+				
+				<GameLayout>
+					<Button handleAction={this.handlePause} message="Pause" style="success"/>
+					<Turn turn={this.props.turn} />
+					<Board 
+						board={this.props.board}
+						playerTurn={this.props.turn}
+						changeTurn={this.props.changeTurn}
+						cellClick={this.handleCellClick}
+					>
+					</Board>
+					<Score score={this.props.score} />
+				</GameLayout>
+			}
+			 </AppLayout>
 		)
 	}
 
@@ -65,7 +86,10 @@ class Game extends Component {
 const mapStateToProps = (state, props) => {
   return {
     board: state.board,
-    turn: state.turn
+		turn: state.turn,
+		showInitialScreen: state.showInitialScreen,
+		score: state.score,
+		pause: state.pause
   }
 }
 

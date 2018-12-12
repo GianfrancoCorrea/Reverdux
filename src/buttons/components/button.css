@@ -1,0 +1,30 @@
+.btn {
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+    font-family: arial;
+    margin: 0 auto;
+    margin-bottom: 1rem
+}
+
+.btn__play {
+    padding: 20px 0;
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    width: 416px;
+}
+.btn__play--success:hover {
+    background-color: rgb(48, 148, 28);
+}
+.btn__play--success {
+    background-color: rgb(59, 180, 35);
+}
+
+.btn__play--danger {
+    background-color: #dc3545!important
+}
+.btn__play--danger:hover {
+    background: #c82333;
+}

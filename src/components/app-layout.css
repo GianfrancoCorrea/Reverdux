@@ -1,0 +1,19 @@
+.AppLayout {
+    display: grid;
+    grid-template-columns: .7fr;
+    justify-content: center;
+    grid-row-gap: 2rem;
+    font-family: arial;
+    color: aliceblue;
+    text-align: center;
+
+}
+
+.AppLayout h1 {
+    font-size: 40px;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 1rem;
+}

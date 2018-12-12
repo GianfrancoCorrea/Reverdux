@@ -20,6 +20,8 @@ const initialState = {
     player1: 0,
     player2: 0,
   },
+  showInitialScreen: true,
+  pause: false,
 }
 
 let store = createStore(

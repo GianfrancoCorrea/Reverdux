@@ -1,20 +1,27 @@
-import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs'
+import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
+import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE} from '../actions/actionTypes'
 
 
 // actions
-const SWITCH_TURN = 'SWITCH_TURN'
-const MAKE_MOVE = 'MAKE_MOVE'
-const NEW_GAME = 'NEW_GAME'
+
 
 function reversiApp(state = initialState, action) {
     switch (action.type) {
         case NEW_GAME:
           return Object.assign({}, state, {
             board: newBoard(),
+            showInitialScreen: showMenu(state),
+            score: getScore([1,1,2,2]),
+            pause: false
           })
         case SWITCH_TURN:
           return Object.assign({}, state, {
             turn: changeTurn(state.turn)
+          }) 
+          case PAUSE:
+          return Object.assign({}, state, {
+            showInitialScreen: showMenu(state),
+            pause: switchPause(state)
           })    
         case MAKE_MOVE:
         return handlerMove(state, action)
@@ -26,14 +33,13 @@ function reversiApp(state = initialState, action) {
 const handlerMove = (state, action) => {
   let board = state.board
   let turn = state.turn
-  let score = state.score
-  const cell = action.cell
-  const row = getCoords(cell, 'y')
-  const col = getCoords(cell, 'x')
+  const clickedCell = action.cell
+  const row = getCoords(clickedCell, 'y')
+  const col = getCoords(clickedCell, 'x')
+// _.flatten
   let cellsToFlip = [];
-
-  if(checkValidMove(board, cell, turn)) {
-      searchSiblings(row, col).map( sibling => {
+  if(checkValidMove(board, clickedCell, turn)) {
+      searchForSiblingsCells(row, col).map( sibling => {
         if(isEnemy(board, sibling.row, sibling.col, turn)) {
           if(checkLimits(sibling.row, sibling.col)) {
             //------------------------------------------------
@@ -47,7 +53,8 @@ const handlerMove = (state, action) => {
 
       if(cellsToFlip.length > 0) {
         return {
-          board: changeBoard(board, cellsToFlip, cell, turn),
+          ...state,
+          board: changeBoard(board, cellsToFlip, clickedCell, turn),
           turn: changeTurn(turn),
           score: getScore(board)
         } 
@@ -70,7 +77,7 @@ const changeBoard = (board, cellsToFlip, cell, turn) => {
         })
         return board
 } 
-const searchSiblings = (clickedRow, clickedCol) => siblingsCells.map( (direction, directionIndex) => {
+const searchForSiblingsCells = (clickedRow, clickedCol) => siblingsCells.map( (direction, directionIndex) => {
       const newRow = clickedRow + direction[0]
       const newCol = clickedCol + direction[1]
       return {row: newRow, col: newCol, directionIndex: directionIndex, cell: getCell(newRow, newCol)}
@@ -155,4 +162,10 @@ const changeTurn = (turn) => {
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0])
 
+const showMenu = (state) => (
+  state.showInitialScreen === false ? true : false
+)
+const switchPause = (state) => {
+  return state.pause === false ? true : false
+}
 export default reversiApp

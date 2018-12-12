@@ -1,0 +1,18 @@
+.turn {
+    /* display: flex; */
+    width: 100%;
+    max-width: 416px;
+    justify-content: center;
+    margin: 0 auto;
+    color: black;
+    font-weight: 600;
+    background: #fafafa;
+    padding: 10px 0;
+    font-size: 1.3rem;
+    border: 1px solid #fafafa;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.turn span {
+    color: #CE1325
+}
