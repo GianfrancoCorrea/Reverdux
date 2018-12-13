@@ -7,24 +7,30 @@
     margin: 0 auto;
     margin-bottom: 1rem
 }
+.btn--small {
+    display: inline-block;
+    padding: 10px;
 
-.btn__play {
-    padding: 20px 0;
-    color: white;
+}
+.btn--big {
+    padding: 10px 0;
     font-size: 25px;
     font-weight: 600;
     width: 416px;
 }
-.btn__play--success:hover {
+.btn--success:hover {
     background-color: rgb(48, 148, 28);
 }
-.btn__play--success {
+.btn--success {
     background-color: rgb(59, 180, 35);
+    color: white;
+
 }
 
-.btn__play--danger {
-    background-color: #dc3545!important
+.btn--danger {
+    background-color: #dc3545!important;
+    color: white;
 }
-.btn__play--danger:hover {
+.btn--danger:hover {
     background: #c82333;
 }

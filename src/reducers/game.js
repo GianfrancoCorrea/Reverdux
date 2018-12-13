@@ -1,5 +1,6 @@
 import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
 import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE} from '../actions/actionTypes';
+import { Stack } from 'immutable'
 
 
 function reversiApp(state = initialState, action) {
@@ -9,7 +10,10 @@ function reversiApp(state = initialState, action) {
             board: newBoard(),
             showInitialScreen: showMenu(state),
             score: getScore([1,1,2,2]),
-            pause: false
+            pause: false,
+            isEnd: false,
+            boardHistory: Stack().push(newBoard()),
+            hint: []
           })
         case SWITCH_TURN:
           return Object.assign({}, state, {
@@ -38,30 +42,67 @@ const handlerMove = (state, action) => {
   const row = getCoords(clickedCell, 'y')
   const col = getCoords(clickedCell, 'x')
 // _.flatten
-  let cellsToFlip = [];
-  if(checkValidMove(board, clickedCell, turn)) {
-      searchForSiblingsCells(row, col).map( sibling => {
-        if(isEnemy(board, sibling.cell, turn)) {
-          if(checkLimits(sibling.row, sibling.col)) {
-            //------------------------------------------------
-            let initialCellToFlip = []
-            let cells = checkEnemyDirection(board, sibling.row, sibling.col, turn, sibling.directionIndex, initialCellToFlip)
-            cellsToFlip = [...cellsToFlip, ...cells]
-            // -----------------------------------------------
-          } 
-        }  
-      })
-
+  let cellsToFlip = []
+if(isValidCell(board, clickedCell, turn)) {
+   cellsToFlip = checkSiblingCell(board, row, col, turn);
+    }
       if(cellsToFlip.length > 0) {
+        const newBoard =  changeBoard(board, cellsToFlip, clickedCell, turn)
+        const score = getScore(newBoard)
+        const isEnd = isGameEnd(score)
+        const bHistory = state.boardHistory
+        let winnerPlayer = 0;
+        if(isEnd){winnerPlayer = winner(score)}
+        const mapHint = hint(state, newBoard, row, col)
         return {
           ...state,
-          board: changeBoard(board, cellsToFlip, clickedCell, turn),
+          board: newBoard,
+          boardHistory: bHistory.push(newBoard),
           turn: changeTurn(turn),
-          score: getScore(board)
+          score: score,
+          isEnd: isEnd,
+          winner: winnerPlayer,
+          hint: mapHint,
         } 
-      }
+      
   } 
   return state
+}
+
+const hint = (state, board, row, col) => {
+  const enemys = allEnemyCells(board, changeTurn(state.turn)) 
+  let cellsHint =[]
+  enemys.map( enemy => {
+  let cellsToFlip = []
+
+    if(!isValidCell(board, enemy, changeTurn(state.turn))) {
+      cellsToFlip = checkSiblingCell(board, row, col, state.turn);
+      if(cellsToFlip.length > 0) {cellsHint = [...cellsHint],[...cellsToFlip]}
+       }
+  })
+  console.log(cellsHint)
+  return cellsHint
+}
+
+const allEnemyCells = (board, turn) => {
+  let enemys = []
+  board.map( (owner, cell) => {
+   return owner !== turn && owner !== 0 ? enemys.push(cell) : false
+  })
+  // console.log(enemys)
+  return enemys
+}
+
+const winner = (score) => {
+  
+  return score.player1 > score.player2 ? 1 : 2
+}
+const isGameEnd = (score) => {
+  if(score.player1 == 0 || score.player2 == 0 || score.player1 + score.player2 == 64 ){
+    return  true
+  } else {
+    return false
+  }
 }
 
 const getScore = (board) => {
@@ -83,24 +124,37 @@ const searchForSiblingsCells = (clickedRow, clickedCol) => siblingsCells.map( (d
       const newCol = clickedCol + direction[1]
       return {row: newRow, col: newCol, directionIndex: directionIndex, cell: getCell(newRow, newCol)}
     })
-const checkSiblingCell = (board, clickedRow, clickedCol, turn) => {       
 
-  
+const checkSiblingCell = (board, row, col, turn) => {     
+  let cellsToFlip = []
+  searchForSiblingsCells(row, col).map( sibling => {
+    if(isEnemy(board, sibling.cell, turn)) {
+       if(!isOnBoardLimit(sibling.row, sibling.col)) {
+        //------------------------------------------------
+        let initialCellToFlip = []
+        let cells = checkEnemyInDirection(board, sibling.cell, turn, sibling.directionIndex, initialCellToFlip)
+        if(cellsToFlip == null || cells == null){return false}
+        cellsToFlip =[...cellsToFlip, ...cells]
+        // -----------------------------------------------
+       } 
+    }  
+  })
+  return cellsToFlip
 }
 
-const checkValidMove = (board, cell, turn) => {
+const isValidCell = (board, cell, turn) => {
         //if cellClicked has owner, cant move
         if(board[cell] == 0){
             return true
          } 
 }
 
- const checkLimits = (y, x) => {
+ const isOnBoardLimit = (y, x) => {
     // checkLimits (board borders)
     if (y < 0 || y > 7 || x < 0 || x > 7) {
-        return false
+        return true
       } 
-    return true
+    return false
 }
 const isEnemy = (board, siblingCell, turn) => {
   // const siblingCell = getCell(y, x)
@@ -112,7 +166,7 @@ const isEnemy = (board, siblingCell, turn) => {
 }
 
 const checkEnemyDirection = (board, y, x, turn, direction, prevCellList) => {
-  if( !checkLimits(y, x)) return false
+  if(isOnBoardLimit(y, x)) return false
   const actualCell = getCell(y,x)
 
   //next coords to check
@@ -126,30 +180,59 @@ const checkEnemyDirection = (board, y, x, turn, direction, prevCellList) => {
   if( owner ==  turn){    
       cellList = [...cellList, actualCell]
       return cellList         
-  } else if( owner == switchPlayer(turn) ){
+  } 
+  if (owner == 0 ){
+     //cant move
+     cellList = []
+     return cellList
+ } 
+   if( owner == switchPlayer(turn) ){
       //keep checking for enemys
       cellList = [...cellList, actualCell]
-      let keepChecking = checkEnemyDirection(board, newRow, newCol, turn, direction, cellList)
-      if(keepChecking.length > 0){
+      let nextEnemy = checkEnemyDirection(board, newRow, newCol, turn, direction, cellList)
+      if(nextEnemy.length > 0){
           //more enemys found
-          cellList = cellList.concat(keepChecking)
+          cellList = cellList.concat(nextEnemy)
       } else {
           //cant move
           cellList = []
       }
       return cellList
-  } else if (owner == 0 ){
-      //cant move
-      cellList = []
-      return cellList
-  } 
+  }
 }
 
+
+
+
+const checkEnemyInDirection = (board, cell, actualPlayer, direction, storageCells) => {
+  //to-do en los bordes come como si no consultara esos bordes.
+  const ownerCell = board[cell];
+  const enemyPlayer = switchPlayer(actualPlayer);
+  const emptyCell = 0;
+
+  if( ownerCell == actualPlayer){return storageCells}
+  if( ownerCell == emptyCell){return []}
+  if( ownerCell == enemyPlayer ){
+    storageCells = [...storageCells, cell]
+    const nextRow = getCoords(cell,'y') + siblingsCells[direction][0]
+    const nextCol = getCoords(cell,'x') + siblingsCells[direction][1]
+    const nextCell = getCell(nextRow, nextCol)
+    if(isOnBoardLimit(nextRow, nextCol)) return []
+    return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storageCells)
+    //if(isNextCellEnemy) return [...storageCells, ...isNextCellEnemy]
+    //return []
+  }
+}
+
+
+
 const changeTurn = (turn) => {
+  
 		if(turn == 1){
 			return 2
 		} else { return 1 }
-	}
+  }
+  
  const newBoard = () => 
   ([0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,

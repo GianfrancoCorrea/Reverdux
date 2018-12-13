@@ -8,7 +8,7 @@
     font-weight: 600;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    background: #fafafa;
+    background: #efefef;
     border: 1px solid #fafafa;
     padding: 10px 0;
     margin-bottom: 1rem;
@@ -46,5 +46,6 @@
 }
 .score__title {
     padding-bottom: 10px;
-    font-size: 20px
+    font-size: 20px;
+    font-weight: 400;
 }

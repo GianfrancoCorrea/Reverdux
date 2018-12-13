@@ -1,5 +1,5 @@
 .turn {
-    /* display: flex; */
+    display: flex;
     width: 100%;
     max-width: 416px;
     justify-content: center;
@@ -7,11 +7,13 @@
     color: black;
     font-weight: 600;
     background: #fafafa;
-    padding: 10px 0;
+    padding: 0;
     font-size: 1.3rem;
     border: 1px solid #fafafa;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    justify-content: space-between;
+    align-items: center;
 }
 .turn span {
     color: #CE1325

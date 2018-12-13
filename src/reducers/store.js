@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import reversiApp from './game'
-
+import { Stack } from 'immutable'
 
 const initialState = {
   board: [],
@@ -11,6 +11,10 @@ const initialState = {
   },
   showInitialScreen: true,
   pause: false,
+  isEnd: false,
+  winner: 0,
+  boardHistory: Stack(),
+  hint: []
 }
 
 const Store = createStore(
