@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: .7fr;
     justify-content: center;
-    grid-row-gap: 2rem;
+    grid-row-gap: 1.3rem;
     font-family: arial;
     color: aliceblue;
     text-align: center;

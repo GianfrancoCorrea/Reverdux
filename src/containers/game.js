@@ -73,7 +73,7 @@ class Game extends Component {
 					>
 					</Board>
 					<Score score={this.props.score} />
-					<BoardRecords boardHistory={this.props.boardHistory} />
+					<BoardRecords boardH={this.props.boardHistory} />
 				</GameLayout>
 			}
 			 </AppLayout>

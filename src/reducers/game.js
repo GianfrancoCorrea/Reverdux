@@ -12,7 +12,9 @@ function reversiApp(state = initialState, action) {
             score: getScore([1,1,2,2]),
             pause: false,
             isEnd: false,
-            boardHistory: Stack().push(newBoard()),
+            boardHistory: Stack([
+              { id:'0',  board: newBoard(), player: state.turn},
+            ]),
             hint: []
           })
         case SWITCH_TURN:
@@ -50,14 +52,14 @@ if(isValidCell(board, clickedCell, turn)) {
         const newBoard =  changeBoard(board, cellsToFlip, clickedCell, turn)
         const score = getScore(newBoard)
         const isEnd = isGameEnd(score)
-        const bHistory = state.boardHistory
+        let bHistory = state.boardHistory
         let winnerPlayer = 0;
         if(isEnd){winnerPlayer = winner(score)}
         const mapHint = hint(state, newBoard, row, col)
         return {
           ...state,
           board: newBoard,
-          boardHistory: bHistory.push(newBoard),
+          boardHistory: bHistory.push({ id: bHistory.size,  board: newBoard, player: state.turn}),
           turn: changeTurn(turn),
           score: score,
           isEnd: isEnd,
@@ -165,42 +167,6 @@ const isEnemy = (board, siblingCell, turn) => {
   } 
 }
 
-const checkEnemyDirection = (board, y, x, turn, direction, prevCellList) => {
-  if(isOnBoardLimit(y, x)) return false
-  const actualCell = getCell(y,x)
-
-  //next coords to check
-  const newRow = y + siblingsCells[direction][0]
-  const newCol = x + siblingsCells[direction][1]
-  const cell = getCell(newRow, newCol)
-
-  const owner = board[cell] 
-  let cellList = [...prevCellList]
-
-  if( owner ==  turn){    
-      cellList = [...cellList, actualCell]
-      return cellList         
-  } 
-  if (owner == 0 ){
-     //cant move
-     cellList = []
-     return cellList
- } 
-   if( owner == switchPlayer(turn) ){
-      //keep checking for enemys
-      cellList = [...cellList, actualCell]
-      let nextEnemy = checkEnemyDirection(board, newRow, newCol, turn, direction, cellList)
-      if(nextEnemy.length > 0){
-          //more enemys found
-          cellList = cellList.concat(nextEnemy)
-      } else {
-          //cant move
-          cellList = []
-      }
-      return cellList
-  }
-}
-
 
 
 
@@ -219,8 +185,6 @@ const checkEnemyInDirection = (board, cell, actualPlayer, direction, storageCell
     const nextCell = getCell(nextRow, nextCol)
     if(isOnBoardLimit(nextRow, nextCol)) return []
     return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storageCells)
-    //if(isNextCellEnemy) return [...storageCells, ...isNextCellEnemy]
-    //return []
   }
 }
 
