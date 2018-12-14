@@ -1,5 +1,5 @@
 import React from 'react';
-import './board-layout.css';
+import '../styles/board-layout.css';
 
 
 function Board(props){

@@ -39,7 +39,12 @@ class Game extends Component {
 			cell: eventData.cell
 		})
 }
-	
+	handleRecordClick = (recordData) => {
+		this.props.dispatch({
+			type: 'SHOW_RECORD',
+			boardID: recordData
+		})
+	}
 	render() {
 		return (
 			<AppLayout >
@@ -73,7 +78,7 @@ class Game extends Component {
 					>
 					</Board>
 					<Score score={this.props.score} />
-					<BoardRecords boardH={this.props.boardHistory} />
+					<BoardRecords boardH={this.props.boardHistory} recordClick={this.handleRecordClick} />
 				</GameLayout>
 			}
 			 </AppLayout>

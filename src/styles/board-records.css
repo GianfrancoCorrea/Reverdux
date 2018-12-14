@@ -44,14 +44,18 @@
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25rem;
+    text-decoration: none;
+
 }
 .badge-light {
     color: #212529;
     background-color: #f8f9fa;
-    text-decoration: none;
+ 
+    border: 1px solid rgba(0,0,0,.125)
+
 }
 .badge-light[href]:focus, .badge-light[href]:hover {
-    text-decoration: none;
+  
     color: #212529;
     background-color: #dae0e5;
 }
@@ -67,4 +71,15 @@
     color: #fff;
     text-decoration: none;
     background-color: #1d2124;
+}
+
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.badge-info[href]:focus, .badge-info[href]:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #117a8b;
 }

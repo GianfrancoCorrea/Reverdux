@@ -1,15 +1,20 @@
 import React from 'react';
 import Button from '../buttons/components/button'
-import './turn.css'
+import '../styles/turn.css'
 
 function WinnerMessage(props){
     const btnStyle = {
-		marginLeft: '20px'
-	  };
+		margin: '0',
+		float: 'left'
+		};
+		const textStyle = {
+			color: 'red',
+			marginLeft: '20px '
+		}
 	return(
         
 		<div className="turn">
-           Ganador player {props.winner}!
+           <span style={textStyle}> Winner player{props.winner}!!!</span> 
            <Button handleAction={props.handleAction} style="success btn--small" addStyle={btnStyle} message="Play again"/>
 	    </div>
 	)

@@ -1,5 +1,5 @@
 import React from 'react';
-import './score.css';
+import '../styles/score.css';
 import PropTypes from 'prop-types'
 
 

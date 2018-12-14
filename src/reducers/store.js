@@ -14,7 +14,8 @@ const initialState = {
   isEnd: false,
   winner: 0,
   boardHistory: Stack(),
-  hint: []
+  hint: [],
+  showRecordMap: false,
 }
 
 const Store = createStore(

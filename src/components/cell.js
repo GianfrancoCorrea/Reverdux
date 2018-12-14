@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { ownerStyle } from '../libs/board-libs';
 import PropTypes from 'prop-types'
 
-import './cell.css';
+import '../styles/cell.css';
 
 
 class Cell extends PureComponent {

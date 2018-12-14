@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import Button from '../buttons/components/button'
-import './turn.css';
+import '../styles/turn.css';
 
 
 function Turn(props){

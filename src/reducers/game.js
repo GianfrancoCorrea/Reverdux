@@ -1,5 +1,5 @@
 import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
-import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE} from '../actions/actionTypes';
+import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD} from '../actions/actionTypes';
 import { Stack } from 'immutable'
 
 
@@ -13,9 +13,10 @@ function reversiApp(state = initialState, action) {
             pause: false,
             isEnd: false,
             boardHistory: Stack([
-              { id:'0',  board: newBoard(), player: state.turn},
+              { id: 0,  board: newBoard(), player: state.turn},
             ]),
-            hint: []
+            hint: [],
+            
           })
         case SWITCH_TURN:
           return Object.assign({}, state, {
@@ -28,14 +29,23 @@ function reversiApp(state = initialState, action) {
           })    
         case MAKE_MOVE:
         return handlerMove(state, action)
-          
+        case SHOW_RECORD: 
+          return showRecord(state, action)
         default:
           return state
         }
 }
 
 
-
+const showRecord = (state, action) => {
+  const boardHistory = state.boardHistory
+  console.log( boardHistory.get(action.boardID).board)
+  return {
+    ...state,
+    board: boardHistory.get(action.boardID).board,
+    showRecordMap: true,
+  }
+}
 
 const handlerMove = (state, action) => {
   let board = state.board
