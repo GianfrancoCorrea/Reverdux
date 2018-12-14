@@ -3,19 +3,16 @@ import '../styles/player-input.css';
 
 
 const PlayerInput = (props) => (
-  <form
-    className="PlayerName"
-    onSubmit={props.handleSubmit}
-  >
+  
     <input
-      ref={props.setRef}
       type="text"
-      placeholder="Enter player1 name"
-      className="Name-input"
-      name="PlayerName"
+      placeholder={props.for}
+      id={props.for}
+      className="form-control form-control-lg"
+      name={props.for}
       value={props.value}
     />
-  </form>
+
 )
 
 export default PlayerInput

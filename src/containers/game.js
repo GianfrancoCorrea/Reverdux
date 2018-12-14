@@ -7,14 +7,18 @@ import GameLayout from '../components/game-layout';
 import Turn from '../components/turn';
 import Score from '../components/score';
 import { connect } from 'react-redux';
-import Button from '../buttons/components/button';
+import ButtonComponent from '../buttons/components/button';
 import WinnerMessage from '../components/winner-message'
-import PlayerInput from '../components/player-input'
+import PlayerNames from '../components/player-names'
 import BoardRecords from '../components/board-records'
 import {Stack} from 'immutable'
 
 class Game extends Component {
 
+	constructor(props) {
+		super(props)
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
 	handlePlay = () => {
 		this.props.dispatch({
@@ -45,6 +49,18 @@ class Game extends Component {
 			boardID: recordData
 		})
 	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		console.log(e.target)
+		this.props.dispatch({
+			type: 'PLAYER_NAMES',
+			player1: e.target.querySelector('#Player1').value,
+			player2: e.target.querySelector('#Player2').value
+		})
+	}
+
+
 	render() {
 		return (
 			<AppLayout >
@@ -52,23 +68,24 @@ class Game extends Component {
 				this.props.showInitialScreen == true ? 
 					this.props.pause == false ? 
 						<Menu show={this.props.showInitialScreen}>
-					
-							<Button handleAction={this.handlePlay} message="Play" style='success btn--big'/>
+							<PlayerNames handleSubmit={this.handleSubmit} playerNames={this.props.players} nameSeted={this.props.nameSeted}>
+							</PlayerNames>
+							<ButtonComponent handleAction={this.handlePlay} message="Play" style='success btn--big'/>
 						</Menu>
 					:
 						<Menu show={this.props.showInitialScreen}>
-							<Button handleAction={this.handlePause} message="Resume" style='success btn--big'/>
-							<Score score={this.props.score}  handleAction={this.switchTurn}/>
-							<Button handleAction={this.handlePlay} message="Restart" style="danger btn--big"/>
+							<ButtonComponent handleAction={this.handlePause} message="Resume" style='success btn--big no-bottom-radius'/>
+							<Score score={this.props.score}  players={this.props.players}/>
+							<ButtonComponent handleAction={this.handlePlay} message="Restart" style="danger btn--big "/>
 						</Menu>
 				: 
 					
 				<GameLayout>
-					<Button handleAction={this.handlePause} message="Pause" style="success btn--big"/>
+					<ButtonComponent handleAction={this.handlePause} message="Pause" style="secondary btn--big no-bottom-radius"/>
 					{this.props.isEnd ? 
 						<WinnerMessage winner={this.props.winner} handleAction={this.handlePlay}/>
 					: 
-						<Turn turn={this.props.turn} handleAction={this.switchTurn}/>
+						<Turn players={this.props.players} turn={this.props.turn} handleAction={this.switchTurn} />
 					}
 					<Board 
 						board={this.props.board}
@@ -77,8 +94,8 @@ class Game extends Component {
 						cellClick={this.handleCellClick}
 					>
 					</Board>
-					<Score score={this.props.score} />
-					<BoardRecords boardH={this.props.boardHistory} recordClick={this.handleRecordClick} />
+					<Score score={this.props.score} players={this.props.players}/>
+					<BoardRecords boardH={this.props.boardHistory} recordClick={this.handleRecordClick}  players={this.props.players} />
 				</GameLayout>
 			}
 			 </AppLayout>
@@ -96,7 +113,10 @@ const mapStateToProps = (state, props) => {
 		pause: state.pause,
 		isEnd: state.isEnd,
 		winner: state.winner,
-		boardHistory: state.boardHistory
+		boardHistory: state.boardHistory,
+		players: state.players,
+		nameSeted: state.nameSeted,
+		players: state.players
   }
 }
 
@@ -109,6 +129,6 @@ Game.propTypes = {
 		turn: PropTypes.number.isRequired,
 		score: PropTypes.objectOf(PropTypes.number).isRequired,
 		isEnd: PropTypes.bool.isRequired,
-		winner: PropTypes.number,
-		boardHistory: PropTypes.instanceOf(Stack)
+		winner: PropTypes.string,
+		boardHistory: PropTypes.instanceOf(Stack).isRequired
 }

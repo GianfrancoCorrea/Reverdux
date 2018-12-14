@@ -1,5 +1,5 @@
 import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
-import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD} from '../actions/actionTypes';
+import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD, PLAYER_NAMES} from '../actions/actionTypes';
 import { Stack } from 'immutable'
 
 
@@ -29,14 +29,28 @@ function reversiApp(state = initialState, action) {
           })    
         case MAKE_MOVE:
         return handlerMove(state, action)
+
         case SHOW_RECORD: 
           return showRecord(state, action)
+
+        case PLAYER_NAMES: 
+          return playerNames(state, action)  
         default:
           return state
         }
 }
 
-
+const playerNames = (state, action) => {
+  let players = state.players
+  players.player1.name = action.player1
+  players.player2.name = action.player2
+  console.log(players)
+  return {
+    ...state,
+    nameSeted: true,
+    players: players
+  }
+}
 const showRecord = (state, action) => {
   const boardHistory = state.boardHistory
   console.log( boardHistory.get(action.boardID).board)
@@ -63,8 +77,8 @@ if(isValidCell(board, clickedCell, turn)) {
         const score = getScore(newBoard)
         const isEnd = isGameEnd(score)
         let bHistory = state.boardHistory
-        let winnerPlayer = 0;
-        if(isEnd){winnerPlayer = winner(score)}
+        let winnerPlayer = '';
+        if(isEnd){winnerPlayer = winner(state, score)}
         const mapHint = hint(state, newBoard, row, col)
         return {
           ...state,
@@ -105,9 +119,9 @@ const allEnemyCells = (board, turn) => {
   return enemys
 }
 
-const winner = (score) => {
+const winner = (state, score) => {
   
-  return score.player1 > score.player2 ? 1 : 2
+  return score.player1 > score.player2 ? state.players.player1.name : state.players.player2.name
 }
 const isGameEnd = (score) => {
   if(score.player1 == 0 || score.player2 == 0 || score.player1 + score.player2 == 64 ){

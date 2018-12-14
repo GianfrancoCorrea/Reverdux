@@ -40,3 +40,8 @@ export const count = (arr, valor) => {
     }) 
     return counter
 }
+
+
+export const playerNames = (players, turn) => {
+    return turn == 1 ? players.player1.name : players.player2.name
+} 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../buttons/components/button'
 import '../styles/turn.css'
+import PropTypes from 'prop-types'
 
 function WinnerMessage(props){
     const btnStyle = {
@@ -14,7 +15,7 @@ function WinnerMessage(props){
 	return(
         
 		<div className="turn">
-           <span style={textStyle}> Winner player{props.winner}!!!</span> 
+           <span style={textStyle}> {props.winner} wins!</span> 
            <Button handleAction={props.handleAction} style="success btn--small" addStyle={btnStyle} message="Play again"/>
 	    </div>
 	)
@@ -24,3 +25,6 @@ function WinnerMessage(props){
 export default WinnerMessage;
 
 
+WinnerMessage.PropTypes = {
+	winner: PropTypes.string.isRequired,
+}

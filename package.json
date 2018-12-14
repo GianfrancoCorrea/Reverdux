@@ -21,14 +21,14 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/slyhunt/reverdux#readme",
   "dependencies": {
-    "babel-preset-stage-2": "^6.24.1",
-    "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.11",
+    "babel-preset-stage-2": "6.24.1",
+    "immutable": "4.0.0-rc.12",
+    "lodash": "4.17.11",
     "prop-types": "15.6.2",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-redux": "5.0.3",
-    "react-transition-group": "^2.5.1",
+    "react-transition-group": "2.5.1",
     "redux": "3.6.0"
   },
   "devDependencies": {

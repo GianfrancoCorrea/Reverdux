@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import '../styles/board-records.css';
 import PropTypes from 'prop-types'
 import { Stack } from 'immutable'
+import {playerNames} from '../libs/board-libs'
 
 class BoardRecords extends PureComponent {
     
@@ -23,7 +24,7 @@ class BoardRecords extends PureComponent {
             <ul>
             { this.props.boardH.map((x, i) => {
                 
-               return <li key={i} onClick={() => this.handleClickLI(this.props.boardH.get(x).id)}><a href="#"  className={this.colorBadge(x.player, x.id)}>#{x.id}- Move Player{x.player}</a></li>
+               return <li key={i} onClick={() => this.handleClickLI(this.props.boardH.get(x).id)}><a href="#"  className={this.colorBadge(x.player, x.id)}>#{x.id}- Move {playerNames(this.props.players, x.player)}</a></li>
             })}
                
             </ul>

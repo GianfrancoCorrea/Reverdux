@@ -1,6 +1,12 @@
-.PlayerName {
-  max-width: 400px;
+.formName {
+
+ 
+  max-width: 418px;
+  margin: 0 auto;
   margin-bottom: 20px;
+}
+.formName form {
+  display: flex;
 }
 
 .name-input {
@@ -18,4 +24,59 @@
 
 .name-input:focus {
   box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.form-control {
+  display: block;
+  /* width: 100%; */
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(0,123,255,.5);
+}
+
+
+.form-control-lg {
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 3px;
+  /* width: 150px; */
+  margin: 0 auto;
+  /* margin-bottom: 5px; */
+  text-align: center;
+  
+}
+.form-control-lg:nth-child(1){
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+
+}
+.form-control-lg:nth-child(2){
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+}
+.btn-lg {
+  border-bottom-left-radius: 0!important;
+  border-top-left-radius: 0!important;
+}
+
+.formName span {
+  font-size: 2rem;
+  color:rgb(48, 148, 28);
 }
