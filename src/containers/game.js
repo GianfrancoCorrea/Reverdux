@@ -92,6 +92,7 @@ class Game extends Component {
 						playerTurn={this.props.turn}
 						changeTurn={this.props.changeTurn}
 						cellClick={this.handleCellClick}
+						hint={this.props.hint}
 					>
 					</Board>
 					<Score score={this.props.score} players={this.props.players}/>
@@ -116,7 +117,8 @@ const mapStateToProps = (state, props) => {
 		boardHistory: state.boardHistory,
 		players: state.players,
 		nameSeted: state.nameSeted,
-		players: state.players
+		players: state.players,
+		hint: state.hint
   }
 }
 

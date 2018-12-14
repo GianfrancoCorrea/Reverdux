@@ -19,6 +19,9 @@ class Cell extends PureComponent {
 			this.props.owner,
 			'board__cell'
 		)
+
+		if(this.props.isHint == true) className = 'board__cell hint'
+		console.log(this.props.isHint)
 		return (
 		    	<div 
 					className={className} 
