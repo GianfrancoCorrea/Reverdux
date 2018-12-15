@@ -1,23 +1,23 @@
 import React from 'react';
-import Button from '../buttons/components/button'
+import ButtonComponent from './button'
 import '../styles/turn.css'
 import PropTypes from 'prop-types'
 
-function WinnerMessage(props){
-    const btnStyle = {
+function WinnerMessage(props) {
+	const btnStyle = {
 		margin: '0',
 		float: 'left'
-		};
-		const textStyle = {
-			color: 'red',
-			marginLeft: '20px '
-		}
-	return(
-        
+	};
+	const textStyle = {
+		color: 'red',
+		marginLeft: '20px '
+	}
+	return (
+
 		<div className="turn">
-           <span style={textStyle}> {props.winner} wins!</span> 
-           <Button handleAction={props.handleAction} style="success btn--small" addStyle={btnStyle} message="Play again"/>
-	    </div>
+			<span style={textStyle}> {props.winner} wins!</span>
+			<ButtonComponent actions={props.actions.newGame} style="success btn--small" addStyle={btnStyle} message="Play again" />
+		</div>
 	)
 }
 

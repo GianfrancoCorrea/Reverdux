@@ -1,65 +1,49 @@
 import { siblingsCells, getCoords, getCell, switchPlayer, count } from '../libs/board-libs';
-import {SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD, PLAYER_NAMES} from '../actions/actionTypes';
-import { Stack } from 'immutable'
-
+import { SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD, PLAYER_NAME, RESTART_GAME } from '../actions/actionTypes';
+import { Stack, List, fromJS } from 'immutable'
+import { initialState } from './store'
 
 function reversiApp(state = initialState, action) {
-    switch (action.type) {
-        case NEW_GAME:
-          return Object.assign({}, state, {
-            board: newBoard(),
-            showInitialScreen: showMenu(state),
-            score: getScore([1,1,2,2]),
-            pause: false,
-            isEnd: false,
-            boardHistory: Stack([
-              { id: 0,  board: newBoard(), player: state.turn},
-            ]),
-            hint: hint(changeTurn(state.turn), newBoard()),
-            
-          })
-        case SWITCH_TURN:
-          return Object.assign({}, state, {
-            turn: changeTurn(state.turn)
-          }) 
-          case PAUSE:
-          return Object.assign({}, state, {
-            showInitialScreen: showMenu(state),
-            pause: switchPause(state)
-          })    
-        case MAKE_MOVE:
-        return handlerMove(state, action)
+  switch (action.type) {
+    case NEW_GAME:
+      return Object.assign({}, state, {
+        board: newBoard(),
+        showInitialScreen: false,
+        score: getScore([1, 1, 2, 2]),
+        pause: false,
+        isEnd: false,
+        boardHistory: List([
+          { id: 0, boardState: newBoard(), player: state.turn },
+        ]),
+        hint: hint(changeTurn(state.turn), newBoard()),
 
-        case SHOW_RECORD: 
-          return showRecord(state, action)
+      })
+    case SWITCH_TURN:
+      return Object.assign({}, state, {
+        turn: changeTurn(state.turn),
+        hint: hint(state.turn, state.board)
+      })
+    case PAUSE:
+      return Object.assign({}, state, {
+        showInitialScreen: showMenu(state),
+        pause: switchPause(state)
+      })
+    case MAKE_MOVE:
+      return handlerMove(state, action)
 
-        case PLAYER_NAMES: 
-          return playerNames(state, action)  
-        default:
-          return state
-        }
-}
+    case SHOW_RECORD:
+      return showRecord(state, action)
 
-const playerNames = (state, action) => {
-  let players = state.players
-  players.player1.name = action.player1
-  players.player2.name = action.player2
-  console.log(players)
-  return {
-    ...state,
-    nameSeted: true,
-    players: players
+    case PLAYER_NAME:
+      return playerNames(state, action)
+    case RESTART_GAME:
+      return initialState
+    default:
+      return state
   }
 }
-const showRecord = (state, action) => {
-  const boardHistory = state.boardHistory
-  console.log( boardHistory.get(action.boardID).board)
-  return {
-    ...state,
-    board: boardHistory.get(action.boardID).board,
-    showRecordMap: true,
-  }
-}
+
+
 
 const handlerMove = (state, action) => {
   let board = state.board
@@ -67,57 +51,103 @@ const handlerMove = (state, action) => {
   const clickedCell = action.cell
   const row = getCoords(clickedCell, 'y')
   const col = getCoords(clickedCell, 'x')
-// _.flatten
+
   let cellsToFlip = []
-if(isValidCell(board, clickedCell, turn)) {
-   cellsToFlip = checkSiblingCell(board, row, col, turn);
+  if (isValidCell(board, clickedCell, turn)) {
+    cellsToFlip = checkSiblingCell(board, row, col, turn);
+  }
+  if (cellsToFlip.length > 0) {
+    const changedBoard = changeBoard(state.board, [...cellsToFlip, clickedCell], turn)
+    const score = getScore(changedBoard)
+    const isEnd = isGameEnd(score)
+
+    let bHistory = state.boardHistory
+    bHistory = state.boardHistory.set(bHistory.size, { id: state.boardHistory.size, boardState: state.board, player: state.turn })
+
+    let winnerPlayer = '';
+    if (isEnd) { winnerPlayer = winner(state, score) }
+    const mapHint = hint(turn, changedBoard)
+
+    return {
+      ...state,
+      board: changedBoard,
+      boardHistory: bHistory,
+      turn: changeTurn(turn),
+      score: score,
+      isEnd: isEnd,
+      winner: winnerPlayer,
+      hint: mapHint,
     }
-      if(cellsToFlip.length > 0) {
-        const newBoard =  changeBoard(board, cellsToFlip, clickedCell, turn)
-        const score = getScore(newBoard)
-        const isEnd = isGameEnd(score)
-        let bHistory = state.boardHistory
-        let winnerPlayer = '';
-        if(isEnd){winnerPlayer = winner(state, score)}
-        const mapHint = hint(turn, newBoard)
-        return {
-          ...state,
-          board: newBoard,
-          boardHistory: bHistory.push({ id: bHistory.size,  board: newBoard, player: state.turn}),
-          turn: changeTurn(turn),
-          score: score,
-          isEnd: isEnd,
-          winner: winnerPlayer,
-          hint: mapHint,
-        } 
-      
-  } 
+
+  }
   return state
 }
 
 const hint = (turn, board) => {
-  // const enemys = allEnemyCells(board, changeTurn(state.turn)) 
-  const nTurn = changeTurn(turn)
+  const newTurn = changeTurn(turn)
   let toHint = []
-  //clickedCell = call map board
+
   board.map((owner, cell) => {
     let cellsToFlip = []
-    if(isValidCell(board, cell, turn)) {
+    if (isValidCell(board, cell, newTurn)) {
       let row = getCoords(cell, 'y')
       let col = getCoords(cell, 'x')
-      cellsToFlip = checkSiblingCell(board, row, col, nTurn);
-       }
-       if(cellsToFlip.length > 0) { toHint = [...toHint, cell]}
+      cellsToFlip = checkSiblingCell(board, row, col, newTurn);
+    }
+    if (cellsToFlip.length > 0) { toHint = [...toHint, cell] }
   })
-  console.log(toHint)
   return toHint
 }
-const allEnemyCells = (board, turn) => {
-  let enemys = []
-  board.map( (owner, cell) => {
-   return owner !== turn && owner !== 0 ? enemys.push(cell) : false
+const playerNames = (state, action) => {
+  let players = state.players
+  if (action.player == 'Player1' && action.name !== "") players.player1.name = action.name
+  if (action.player == 'Player2' && action.name !== "") players.player2.name = action.name
+  return {
+    ...state,
+    players: players
+  }
+}
+
+const showRecord = (state, action) => {
+  // const boardHistory = state.boardHistory
+  // console.log( boardHistory)
+
+  return {
+    ...state,
+    board: action.record,
+    showRecordMap: true,
+  }
+}
+
+const changeBoard = (oldBoard, cellsToFlip, turn) => {
+  //add clicked cell
+  const board = oldBoard
+
+  cellsToFlip.map(c => {
+    board[c] = turn
   })
-  return enemys
+  return board
+}
+
+const searchForSiblingsCells = (clickedRow, clickedCol) => siblingsCells.map((direction, directionIndex) => {
+  const newRow = clickedRow + direction[0]
+  const newCol = clickedCol + direction[1]
+  return { row: newRow, col: newCol, directionIndex: directionIndex, cell: getCell(newRow, newCol) }
+})
+
+const checkSiblingCell = (board, row, col, turn) => {
+  let cellsToFlip = []
+  searchForSiblingsCells(row, col).map(sibling => {
+    if (isEnemy(board, sibling.cell, turn)) {
+      if (!isOnBoardLimit(sibling.row, sibling.col)) {
+        let initialCellToFlip = []
+        let cells = checkEnemyInDirection(board, sibling.cell, turn, sibling.directionIndex, initialCellToFlip)
+        if (cellsToFlip == null || cells == null) { return false }
+        cellsToFlip = [...cellsToFlip, ...cells]
+      }
+    }
+  })
+  return cellsToFlip
 }
 
 const winner = (state, score) => {
@@ -125,11 +155,7 @@ const winner = (state, score) => {
 }
 
 const isGameEnd = (score) => {
-  if(score.player1 == 0 || score.player2 == 0 || score.player1 + score.player2 == 64 ){
-    return  true
-  } else {
-    return false
-  }
+  return score.player1 == 0 || score.player2 == 0 || score.player1 + score.player2 == 64
 }
 
 const getScore = (board) => {
@@ -138,74 +164,40 @@ const getScore = (board) => {
     player2: count(board, 2)
   }
 }
-const changeBoard = (board, cellsToFlip, cell, turn) => {
-  //add clicked cell
-  cellsToFlip = [...cellsToFlip, cell]
-        cellsToFlip.map(cell =>{
-          board[cell] = turn
-        })
-        return board
-} 
-const searchForSiblingsCells = (clickedRow, clickedCol) => siblingsCells.map( (direction, directionIndex) => {
-      const newRow = clickedRow + direction[0]
-      const newCol = clickedCol + direction[1]
-      return {row: newRow, col: newCol, directionIndex: directionIndex, cell: getCell(newRow, newCol)}
-    })
-
-const checkSiblingCell = (board, row, col, turn) => {     
-  let cellsToFlip = []
-  searchForSiblingsCells(row, col).map( sibling => {
-    if(isEnemy(board, sibling.cell, turn)) {
-       if(!isOnBoardLimit(sibling.row, sibling.col)) {
-        //------------------------------------------------
-        let initialCellToFlip = []
-        let cells = checkEnemyInDirection(board, sibling.cell, turn, sibling.directionIndex, initialCellToFlip)
-        if(cellsToFlip == null || cells == null){return false}
-        cellsToFlip =[...cellsToFlip, ...cells]
-        // -----------------------------------------------
-       } 
-    }  
-  })
-  return cellsToFlip
-}
-
 const isValidCell = (board, cell, turn) => {
-        //if cellClicked has owner, cant move
-        if(board[cell] == 0){
-            return true
-         } 
+  //if cellClicked has owner, cant move
+  if (board[cell] == 0) {
+    return true
+  }
 }
 
- const isOnBoardLimit = (y, x) => {
-    if (y < 0 || y > 7 || x < 0 || x > 7) {
-        return true
-      } 
-    return false
+const isOnBoardLimit = (y, x) => {
+  if (y < 0 || y > 7 || x < 0 || x > 7) {
+    return true
+  }
+  return false
 }
 const isEnemy = (board, siblingCell, turn) => {
   const siblingOwner = board[siblingCell]
-  if( siblingOwner !== turn && siblingOwner !== 0){
-      //enemy found
-      return true
-  } 
+  if (siblingOwner !== turn && siblingOwner !== 0) {
+    //enemy found
+    return true
+  }
 }
-
-
-
 
 const checkEnemyInDirection = (board, cell, actualPlayer, direction, storageCells) => {
   const ownerCell = board[cell];
   const enemyPlayer = switchPlayer(actualPlayer);
   const emptyCell = 0;
 
-  if( ownerCell == actualPlayer){return storageCells}
-  if( ownerCell == emptyCell){return []}
-  if( ownerCell == enemyPlayer ){
+  if (ownerCell == actualPlayer) { return storageCells }
+  if (ownerCell == emptyCell) { return [] }
+  if (ownerCell == enemyPlayer) {
     storageCells = [...storageCells, cell]
-    const nextRow = getCoords(cell,'y') + siblingsCells[direction][0]
-    const nextCol = getCoords(cell,'x') + siblingsCells[direction][1]
+    const nextRow = getCoords(cell, 'y') + siblingsCells[direction][0]
+    const nextCol = getCoords(cell, 'x') + siblingsCells[direction][1]
     const nextCell = getCell(nextRow, nextCol)
-    if(isOnBoardLimit(nextRow, nextCol)) return []
+    if (isOnBoardLimit(nextRow, nextCol)) return []
     return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storageCells)
   }
 }
@@ -213,13 +205,10 @@ const checkEnemyInDirection = (board, cell, actualPlayer, direction, storageCell
 
 
 const changeTurn = (turn) => {
-  
-		if(turn == 1){
-			return 2
-		} else { return 1 }
-  }
-  
- const newBoard = () => 
+  return turn == 1 ? 2 : 1
+}
+
+const newBoard = () =>
   ([0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,

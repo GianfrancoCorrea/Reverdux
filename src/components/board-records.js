@@ -1,36 +1,35 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import '../styles/board-records.css';
 import PropTypes from 'prop-types'
 import { Stack } from 'immutable'
-import {playerNames} from '../libs/board-libs'
+import { playerNames } from '../libs/board-libs'
 
-class BoardRecords extends PureComponent {
-    
-    
-	handleClickLI = (boardID) => {
-        console.log(boardID)
-		this.props.recordClick(boardID)
+
+
+function BoardRecords(props) {
+
+    const colorBadge = (player, id) => {
+        if (id == 0) return 'badge badge-info'
+        if (player == 1) return 'badge badge-dark'
+        if (player == 2) return 'badge badge-light'
     }
-    colorBadge = (player, id) => {
-        if(id == 0) return 'badge badge-info'
-        if(player == 1) return 'badge badge-dark'
-        if(player == 2) return 'badge badge-light'
-    }
-	render(){
-	return(
-		<div className="records">
-        <div className="records__top"><span>Records:</span></div>
-        
+    return (
+        <div className="records">
+            <div className="records__top"><span>Records:</span></div>
+
             <ul>
-            { this.props.boardH.map((x, i) => {
-                
-               return <li key={i} onClick={() => this.handleClickLI(this.props.boardH.get(x).id)}><a href="#"  className={this.colorBadge(x.player, x.id)}>#{x.id}- Move {playerNames(this.props.players, x.player)}</a></li>
-            })}
-               
+                {props.boardHistory.reverse().map((x, i) => (
+
+                    <li key={i} onClick={() => props.actions.showRecord(x.boardState)}>
+                        <a href="#" className={colorBadge(x.player, x.id)}>
+                            #{x.id + ' - '}  {x.id !== 0 ? 'Move ' + playerNames(props.players, x.player) : 'Start'}
+                        </a>
+                    </li>
+                ))}
+
             </ul>
-	    </div>
-	)
-    }
+        </div>
+    )
 }
 
 
@@ -39,6 +38,6 @@ export default BoardRecords;
 
 
 BoardRecords.propTypes = {
-	boardH:  PropTypes.instanceOf(Stack).isRequired,
-	
+    // boardH:  PropTypes.instanceOf(Stack).isRequired,
+
 }

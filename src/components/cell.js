@@ -1,46 +1,28 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { ownerStyle } from '../libs/board-libs';
 import PropTypes from 'prop-types'
-
 import '../styles/cell.css';
 
+function Cell(props) {
 
-class Cell extends PureComponent {
+	let className = ownerStyle(
+		props.owner,
+		'board__cell'
+	)
 
-
-	
-
-	handleClick = (event) => {
-		this.props.cellClick(this.props)
-	}
-	render(){
-		
-		let className = ownerStyle(
-			this.props.owner,
-			'board__cell'
-		)
-
-		if(this.props.isHint == true) className = 'board__cell hint'
-		console.log(this.props.isHint)
-		return (
-		    	<div 
-					className={className} 
-					onClick={this.handleClick} >
-						<div className='token'></div>
-				</div>
-
-			)
-
-	
-		
-	}
+	if (props.isHint == true) className = 'board__cell hint'
+	return (
+		<div
+			className={className}
+			onClick={() => props.actions.makeMove(props.cell)} >
+			<div className='token'></div>
+		</div>
+	)
 }
-
-
 
 export default Cell;
 
-Cell.propTypes = {
-	owner: PropTypes.number.isRequired,
-	cellClick: PropTypes.func,
-}
+// Cell.propTypes = {
+// 	owner: PropTypes.number.isRequired,
+// 	cellClick: PropTypes.func,
+// }

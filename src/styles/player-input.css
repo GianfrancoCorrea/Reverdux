@@ -60,21 +60,19 @@
   
 }
 .form-control-lg:nth-child(1){
+  margin-top: 1rem;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
+ 
 
 }
 .form-control-lg:nth-child(2){
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+margin-bottom: 1rem;
 
 }
-.btn-lg {
-  border-bottom-left-radius: 0!important;
-  border-top-left-radius: 0!important;
-}
+
 
 .formName span {
   font-size: 2rem;
