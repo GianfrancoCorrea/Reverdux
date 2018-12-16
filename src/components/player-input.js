@@ -16,7 +16,7 @@ const PlayerInput = (props) => {
 
     />
 
-  )
-}
+  );
+};
 
-export default PlayerInput
+export default PlayerInput;

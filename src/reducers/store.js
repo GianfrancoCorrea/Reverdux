@@ -1,6 +1,6 @@
+import { Stack } from 'immutable';
 import { createStore } from 'redux';
-import reversiApp from './game'
-import { Stack, Map } from 'immutable'
+import reversiApp from './game';
 
 export const initialState = {
   board: [],
@@ -35,4 +35,4 @@ const store = createStore(
 );
 
 
-export default store
+export default store;

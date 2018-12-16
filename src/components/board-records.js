@@ -35,9 +35,6 @@ function BoardRecords(props) {
 
 export default BoardRecords;
 
-
-
 BoardRecords.propTypes = {
     // boardH:  PropTypes.instanceOf(Stack).isRequired,
-
 }

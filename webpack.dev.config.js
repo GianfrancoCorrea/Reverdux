@@ -39,7 +39,7 @@ module.exports = {
             name: 'images/[name].[hash].[ext]',
           }
         }
-      },
+      }
     ]
   }
 }
