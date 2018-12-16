@@ -62,7 +62,7 @@ const handlerMove = (state, action) => {
     const isEnd = isGameEnd(score)
 
     let bHistory = state.boardHistory
-    bHistory = state.boardHistory.set(bHistory.size, { id: state.boardHistory.size, boardState: state.board, player: state.turn })
+    bHistory = bHistory.set(bHistory.size, { id: bHistory.size, boardState: changedBoard.slice(), player: turn })
 
     let winnerPlayer = '';
     if (isEnd) { winnerPlayer = winner(state, score) }
