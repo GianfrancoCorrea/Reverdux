@@ -1,15 +1,8 @@
 import React from 'react';
 import '../styles/board-layout.css';
 
-
-function Board(props) {
-	return (
-		<div className="board">
-
-			{props.children}
-		</div>
-	)
+function Board({ children }) {
+  return <div className="board">{children}</div>;
 }
-
 
 export default Board;

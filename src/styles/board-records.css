@@ -33,7 +33,9 @@
     margin: 10px 0;
     margin-left: 20px;
 }
-
+.records ul li:hover {
+    cursor: pointer
+}
 .badge {
     display: inline-block;
     padding: .25em .4em;

@@ -1,34 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import BoardLayout from './board-layout';
-import Cell from './cell'
-import { List } from 'immutable'
+import Cell from './cell';
 
-class Board extends Component {
+function Board({ hint, board, actions }) {
+  const toHint = List(hint);
+  const cell = board.map((r, x) => (
+    <Cell owner={r} cell={x} key={x} isHint={toHint.includes(x)} actions={actions} />
+  ));
 
-    render() {
-        let toHint = List(this.props.hint)
-        let cell = this.props.board.map((r, x) => {
-
-            return (<Cell
-                owner={r}
-                cell={x}
-                key={x}
-                isHint={toHint.includes(x)}
-                actions={this.props.actions}
-            />)
-        })
-
-        return (
-            <BoardLayout >
-                {cell}
-            </BoardLayout>
-        )
-    }
+  return <BoardLayout>{cell}</BoardLayout>;
 }
 
-
-export default Board
+export default Board;
 
 // Board.propTypes = {
 // 	board:  PropTypes.arrayOf(PropTypes.number).isRequired,

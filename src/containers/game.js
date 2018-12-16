@@ -30,6 +30,7 @@ class Game extends PureComponent {
             boardHistory={this.props.boardHistory}
             score={this.props.score}
             isEnd={this.props.isEnd}
+            showRecordMap={this.props.showRecordMap}
           />
         )}
       </AppLayout>
@@ -48,6 +49,7 @@ const mapStateToProps = state => ({
   boardHistory: state.boardHistory,
   players: state.players,
   hint: state.hint,
+  showRecordMap: state.showRecordMap,
 });
 
 export default connect(
@@ -66,7 +68,7 @@ Game.propTypes = {
   isEnd: PropTypes.bool.isRequired,
   winner: PropTypes.string.isRequired,
   hint: PropTypes.arrayOf(PropTypes.number).isRequired,
-  players: PropTypes.object.isRequired,
+  players: PropTypes.objectOf(PropTypes.object).isRequired,
 
   // boardHistory: PropTypes.instanceOf(Stack).isRequired
 };

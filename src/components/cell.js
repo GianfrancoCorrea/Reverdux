@@ -1,23 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ownerStyle } from '../libs/board-libs';
-import PropTypes from 'prop-types'
 import '../styles/cell.css';
 
-function Cell(props) {
+function Cell({ actions, isHint, owner, cell }) {
+  let className = ownerStyle(owner, 'board__cell');
 
-	let className = ownerStyle(
-		props.owner,
-		'board__cell'
-	)
-
-	if (props.isHint == true) className = 'board__cell hint'
-	return (
-		<div
-			className={className}
-			onClick={() => props.actions.makeMove(props.cell)} >
-			<div className='token'></div>
-		</div>
-	)
+  if (isHint === true) className = 'board__cell hint';
+  return (
+    <div className={className} onClick={() => actions.makeMove(cell)}>
+      <div className="token" />
+    </div>
+  );
 }
 
 export default Cell;

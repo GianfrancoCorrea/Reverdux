@@ -1,40 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Board from './board';
-import BoardRecords from './board-records';
+import Records from './records';
 import ButtonComponent from './button';
 import Score from './score';
 import Turn from './turn';
 import WinnerMessage from './winner-message';
 
-function GameLayout(props) {
+function GameLayout({ actions, board, turn, players, score, winner, isEnd, boardHistory, hint, showRecordMap }) {
   return (
     <div className="GameLayout">
       <ButtonComponent
-        actions={props.actions.pause}
+        actions={actions.pause}
         message="Pause"
         styleBtn="secondary btn--big no-bottom-radius"
       />
-      {props.isEnd ? (
-        <WinnerMessage winner={props.winner} actions={props.actions} />
+      {showRecordMap ? (' ') : (' ')}
+      {isEnd ? (
+        <WinnerMessage winner={winner} actions={actions} />
       ) : (
-        <Turn players={props.players} turn={props.turn} actions={props.actions.switchTurn} />
+        <Turn players={players} turn={turn} actions={actions.switchTurn} />
       )}
       <Board
-        board={props.board}
-        playerTurn={props.turn}
-        changeTurn={props.changeTurn}
-        hint={props.hint}
-        actions={props.actions}
-        boardHistory={props.boardHistory}
+        board={board}
+        playerTurn={turn}
+        hint={hint}
+        actions={actions}
+        boardHistory={boardHistory}
       />
-      <Score score={props.score} players={props.players} />
-      <BoardRecords
-        boardHistory={props.boardHistory}
-        actions={props.actions}
-        players={props.players}
+      <Score score={score} players={players} />
+      <Records
+        boardHistory={boardHistory}
+        actions={actions}
+        players={players}
       />
     </div>
   );
 }
 
 export default GameLayout;
+
+GameLayout.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  board: PropTypes.arrayOf(PropTypes.number).isRequired,
+  turn: PropTypes.number.isRequired,
+};

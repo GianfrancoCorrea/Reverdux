@@ -3,13 +3,13 @@ import React from 'react';
 import '../styles/button.css';
 
 
-function Button(props) {
-  const className = 'btn btn--' + props.styleBtn
+function Button({ message, actions, addStyle, styleBtn }) {
+  const className = 'btn btn--' + styleBtn;
   return (
-    <div className={className} onClick={props.actions} style={props.addStyle}>
-      {props.message}
+    <div className={className} onClick={actions} style={addStyle}>
+      {message}
     </div>
-  )
+  );
 }
 
 export default Button;
@@ -17,5 +17,6 @@ export default Button;
 Button.propTypes = {
   // handleAction: PropTypes.func.isRequired,
   styleBtn: PropTypes.string.isRequired,
+  addStyle: PropTypes.string.isRequired,
 
 };

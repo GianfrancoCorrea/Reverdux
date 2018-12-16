@@ -3,7 +3,7 @@ import {
   MAKE_MOVE,
   NEW_GAME,
   PAUSE,
-  PLAYER_NAME,
+  PLAYER_SET_NAME,
   RESTART_GAME,
   SHOW_RECORD,
   SWITCH_TURN,
@@ -39,8 +39,8 @@ function reversiApp(state = initialState, action) {
     case SHOW_RECORD:
       return boardLibs.showRecord(state, action);
 
-    case PLAYER_NAME:
-      return boardLibs.playerNames(state, action);
+    case PLAYER_SET_NAME:
+      return boardLibs.playerSetNames(state, action);
     case RESTART_GAME:
       return initialState;
     default:

@@ -3,7 +3,7 @@ import React from 'react';
 import '../styles/turn.css';
 import ButtonComponent from './button';
 
-function WinnerMessage(props) {
+function WinnerMessage({ actions, winner }) {
   const btnStyle = {
     margin: '0',
     float: 'left',
@@ -15,8 +15,11 @@ function WinnerMessage(props) {
   return (
 
     <div className="turn">
-      <span style={textStyle}> {props.winner} wins!</span>
-      <ButtonComponent actions={props.actions.newGame} styleBtn="success btn--small" addStyle={btnStyle} message="Play again" />
+      <span style={textStyle}>
+        {winner}
+        {'wins!'}
+      </span>
+      <ButtonComponent actions={actions.newGame} styleBtn="success btn--small" addStyle={btnStyle} message="Play again" />
     </div>
   );
 }
@@ -25,6 +28,6 @@ function WinnerMessage(props) {
 export default WinnerMessage;
 
 
-WinnerMessage.PropTypes = {
+WinnerMessage.propTypes = {
   winner: PropTypes.string.isRequired,
-}
+};

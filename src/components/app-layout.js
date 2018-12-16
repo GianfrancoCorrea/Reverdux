@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/app-layout.css';
 
-function AppLayout(props) {
+function AppLayout({ children }) {
   return (
     <div className="AppLayout">
       <div>
@@ -9,7 +9,7 @@ function AppLayout(props) {
         <span className="subtitle">A Reversi game made with React and Redux</span>
       </div>
 
-      { props.children }
+      { children }
     </div>
   );
 }

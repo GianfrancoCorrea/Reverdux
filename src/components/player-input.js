@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/player-input.css';
 
-const PlayerInput = (props) => {
-  let placeholder = props.for + ' name'
+const PlayerInput = ({ forPlayer, actions }) => {
+  const placeholder = `${forPlayer} name`;
 
   return (
 
@@ -11,8 +12,8 @@ const PlayerInput = (props) => {
       placeholder={placeholder}
       id={placeholder}
       className="form-control form-control-lg"
-      name={props.for}
-      onKeyUp={(e) => props.actions.playerName(e.target.value, props.for)}
+      name={forPlayer}
+      onKeyUp={e => actions.playerName(e.target.value, forPlayer)}
 
     />
 
@@ -20,3 +21,8 @@ const PlayerInput = (props) => {
 };
 
 export default PlayerInput;
+
+PlayerInput.propTypes = {
+  forPlayer: PropTypes.string.isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+};

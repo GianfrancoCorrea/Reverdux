@@ -4,7 +4,7 @@ import {
   NEW_GAME,
   PAUSE,
   SHOW_RECORD,
-  PLAYER_NAME,
+  PLAYER_SET_NAME,
   RESTART_GAME,
 } from './actionTypes';
 
@@ -35,7 +35,7 @@ export function pause() {
 
 export function playerName(name, player) {
   return {
-    type: PLAYER_NAME,
+    type: PLAYER_SET_NAME,
     name,
     player,
   };
