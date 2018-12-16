@@ -7,7 +7,7 @@ import Score from './score';
 import Turn from './turn';
 import WinnerMessage from './winner-message';
 
-function GameLayout({ actions, board, turn, players, score, winner, isEnd, boardHistory, hint, showRecordMap }) {
+function GameLayout({ actions, board, turn, players, score, winner, isEnd, boardHistory, hint }) {
   return (
     <div className="GameLayout">
       <ButtonComponent
@@ -15,7 +15,6 @@ function GameLayout({ actions, board, turn, players, score, winner, isEnd, board
         message="Pause"
         styleBtn="secondary btn--big no-bottom-radius"
       />
-      {showRecordMap ? (' ') : (' ')}
       {isEnd ? (
         <WinnerMessage winner={winner} actions={actions} />
       ) : (

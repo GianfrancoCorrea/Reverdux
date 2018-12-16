@@ -209,11 +209,16 @@ export const playerSetNames = (state, action) => {
   };
 };
 
-export const showRecord = (state, action) => ({
-  ...state,
-  board: action.record,
-  showRecordMap: true,
-});
+export const showRecord = (state, action) => {
+  console.log(action)
+  return{
+    ...state,
+    pause: true,
+    showRecord: true,
+    showInitialScreen: true,
+    recordBoard: action.record,
+  }
+};
 
 export const newBoard = () => [
   0, 0, 0, 0, 0, 0, 0, 0,

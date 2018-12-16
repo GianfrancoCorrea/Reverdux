@@ -32,6 +32,7 @@ function reversiApp(state = initialState, action) {
       return Object.assign({}, state, {
         showInitialScreen: boardLibs.showMenu(state),
         pause: boardLibs.switchPause(state),
+        showRecord: false,
       });
     case MAKE_MOVE:
       return boardLibs.handlerMove(state, action);
