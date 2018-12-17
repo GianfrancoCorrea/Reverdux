@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { ownerStyle } from '../libs/board-libs';
 import '../styles/cell.css';
 
-function Cell({ actions, isHint, owner, cell }) {
+function Cell({
+  actions, isHint, owner, cell,
+}) {
+  Cell.defaultProps = {
+    isHint: null,
+  };
+
   let className = ownerStyle(owner, 'board__cell');
 
   if (isHint === true) className = 'board__cell hint';
@@ -16,7 +22,9 @@ function Cell({ actions, isHint, owner, cell }) {
 
 export default Cell;
 
-// Cell.propTypes = {
-// 	owner: PropTypes.number.isRequired,
-// 	cellClick: PropTypes.func,
-// }
+Cell.propTypes = {
+  owner: PropTypes.number.isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  isHint: PropTypes.bool,
+  cell: PropTypes.number.isRequired,
+};

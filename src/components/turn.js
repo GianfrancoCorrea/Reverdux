@@ -5,7 +5,14 @@ import { playerNames } from '../libs/board-libs';
 import '../styles/turn.css';
 import '../styles/score.css';
 
-function Turn({ turn, players, actions }) {
+function Turn({
+  turn, players, actions, isRecord,
+}) {
+  Turn.defaultProps = {
+    isRecord: false,
+    actions: () => {},
+  };
+
   const btnStyle = {
     margin: '0',
     fontWeight: '600',
@@ -22,10 +29,25 @@ function Turn({ turn, players, actions }) {
   };
   const coinClass = turn === 1 ? 'coin score__player--one' : 'coin score__player--two';
   const playerName = playerNames(players, turn);
-  return (
+  return !isRecord ? (
     <div className="turn">
       <div style={divStyle}>
-        <b>Turn:</b>
+        <b>Turn: &nbsp;</b>
+        <b>
+          <span>
+            {' '}
+            {playerName}
+            {' '}
+          </span>
+        </b>
+        <div className={coinClass} style={coinStyle} />
+      </div>
+      <Button actions={actions} styleBtn="danger btn--small" addStyle={btnStyle} message="PASS" />
+    </div>
+  ) : (
+    <div className="turn">
+      <div style={divStyle}>
+        <b>Turn played by: &nbsp;</b>
         <b>
           <span>
             {' '}
@@ -34,7 +56,6 @@ function Turn({ turn, players, actions }) {
         </b>
         <div className={coinClass} style={coinStyle} />
       </div>
-      <Button actions={actions} styleBtn="danger btn--small" addStyle={btnStyle} message="PASS" />
     </div>
   );
 }
@@ -43,6 +64,13 @@ export default Turn;
 
 Turn.propTypes = {
   turn: PropTypes.number.isRequired,
-  players: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  actions: PropTypes.func.isRequired,
+  players: PropTypes.objectOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType(
+        [PropTypes.string, PropTypes.number],
+      ),
+    ),
+  ).isRequired,
+  actions: PropTypes.func,
+  isRecord: PropTypes.bool,
 };

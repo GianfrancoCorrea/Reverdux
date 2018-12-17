@@ -2,23 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 // import '../styles/turn.css';
 import ButtonComponent from './button';
-import Board from './board'
+import Board from './board';
+import Turn from './turn';
 
-function RecordBoard({ actions, record,  }) {
-  const btnStyle = {
-    margin: '0',
-    float: 'left',
-  };
-  const textStyle = {
-    color: 'red',
-    marginLeft: '20px ',
-  };
+function RecordBoard({ actions, record, players }) {
+  const isRecord = true;
   return (
 
     <div>
-        <ButtonComponent actions={actions.pause} message="Resume" styleBtn="success btn--big"/>
-        <Board
-        board={record}
+      <ButtonComponent actions={actions.pause} message="Resume" styleBtn="success btn--big mb-3" />
+      <Turn turn={record.player} isRecord={isRecord} players={players} />
+      <Board
+        board={record.boardState}
         actions={actions}
         isHint={[]}
       />
@@ -31,5 +26,13 @@ export default RecordBoard;
 
 
 RecordBoard.propTypes = {
-  winner: PropTypes.string.isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  players: PropTypes.objectOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType(
+        [PropTypes.string, PropTypes.number],
+      ),
+    ),
+  ).isRequired,
+  record: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.array])).isRequired,
 };

@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/board-records.css';
-import { Stack } from 'immutable';
+import { List } from 'immutable';
 import { playerNames } from '../libs/board-libs';
 
-function BoardRecords({ actions, board, boardHistory, players }) {
+function BoardRecords({
+  actions, boardHistory, players,
+}) {
   const colorBadge = (player, id) => {
-    if (id === 0) return 'badge badge-info';
-    if (player === 1) return 'badge badge-dark';
-    if (player === 2) return 'badge badge-light';
+    let classBadge = '';
+    if (player === 1) classBadge = 'badge badge-dark';
+    if (player === 2) classBadge = 'badge badge-light';
+    if (id === 0) classBadge = 'badge badge-info';
+    return classBadge;
   };
   return (
     <div className="records">
@@ -18,7 +22,7 @@ function BoardRecords({ actions, board, boardHistory, players }) {
 
       <ul>
         {boardHistory.reverse().map((x, i) => (
-          <li key={i} onClick={() => actions.showRecord(x.boardState)}>
+          <li key={i} onClick={() => actions.showRecord(x)}>
             <div className={colorBadge(x.player, x.id)}>
               {'#'}
               {`${x.id} - `}
@@ -35,5 +39,13 @@ function BoardRecords({ actions, board, boardHistory, players }) {
 export default BoardRecords;
 
 BoardRecords.propTypes = {
-  // boardH:  PropTypes.instanceOf(Stack).isRequired,
+  boardHistory: PropTypes.instanceOf(List).isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  players: PropTypes.objectOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType(
+        [PropTypes.string, PropTypes.number],
+      ),
+    ),
+  ).isRequired,
 };

@@ -4,7 +4,8 @@
       "linebreak-style": ["error", "windows"],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "sourceType": "module",
-      "allowImportExportEverywhere": true
+      "allowImportExportEverywhere": true,
+      "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }]
     },
     "extends": "airbnb"
   }

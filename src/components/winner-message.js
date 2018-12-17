@@ -17,7 +17,7 @@ function WinnerMessage({ actions, winner }) {
     <div className="turn">
       <span style={textStyle}>
         {winner}
-        {'wins!'}
+        {' wins!'}
       </span>
       <ButtonComponent actions={actions.newGame} styleBtn="success btn--small" addStyle={btnStyle} message="Play again" />
     </div>
@@ -29,5 +29,6 @@ export default WinnerMessage;
 
 
 WinnerMessage.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
   winner: PropTypes.string.isRequired,
 };

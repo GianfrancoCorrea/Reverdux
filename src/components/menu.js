@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/menu.css';
 import ButtonComponent from './button';
 import Score from './score';
 import PlayerInput from './player-input';
 
-function Menu({pause, actions, players, score}) {
-  return pause === false ? (
+function Menu({
+  pause, actions, players, score, showInitialScreen,
+}) {
+  return pause && showInitialScreen ? (
     <div className="Menu">
       <PlayerInput forPlayer="Player1" actions={actions} />
       <PlayerInput forPlayer="Player2" actions={actions} />
@@ -38,3 +41,11 @@ function Menu({pause, actions, players, score}) {
 }
 
 export default Menu;
+
+Menu.propTypes = {
+  pause: PropTypes.bool.isRequired,
+  showInitialScreen: PropTypes.bool.isRequired,
+  players: PropTypes.objectOf(PropTypes.object).isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  score: PropTypes.objectOf(PropTypes.number).isRequired,
+};

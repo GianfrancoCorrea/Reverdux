@@ -6,38 +6,42 @@ import * as actions from '../actions/gameActions';
 import AppLayout from '../components/app-layout';
 import GameLayout from '../components/game-layout';
 import Menu from '../components/menu';
-import RecordBoard from '../components/record-board'
+import RecordBoard from '../components/record-board';
+
 class Game extends PureComponent {
   render() {
     return (
       <AppLayout>
-        {this.props.showInitialScreen === true ? (
-          this.props.showRecord ===true ? 
-          (<RecordBoard actions={this.props.actions} record={this.props.recordBoard} />)
-            : (
-              <Menu
-                pause={this.props.pause}
-                show={this.props.showInitialScreen}
-                score={this.props.score}
-                players={this.props.players}
-                actions={this.props.actions}
-              />
-
-            )
-        ) : (
-            <GameLayout
-              actions={this.props.actions}
-              winner={this.props.winner}
-              players={this.props.players}
-              turn={this.props.turn}
-              hint={this.props.hint}
-              board={this.props.board}
-              boardHistory={this.props.boardHistory}
-              score={this.props.score}
-              isEnd={this.props.isEnd}
-              showRecordMap={this.props.showRecordMap}
-            />
-          )}
+        {this.props.showInitialScreen || (this.props.pause && !this.props.showRecord) ? (
+          <Menu
+            pause={this.props.pause}
+            show={this.props.showInitialScreen}
+            score={this.props.score}
+            players={this.props.players}
+            actions={this.props.actions}
+            showInitialScreen={this.props.showInitialScreen}
+          />
+        ) : null}
+        {this.props.showRecord === true ? (
+          <RecordBoard 
+            actions={this.props.actions} 
+            record={this.props.recordBoard}
+            players={this.props.players} />
+        ) : null}
+        {!this.props.pause && !this.props.showInitialScreen && !this.props.showRecord ? (
+          <GameLayout
+            actions={this.props.actions}
+            winner={this.props.winner}
+            players={this.props.players}
+            turn={this.props.turn}
+            hint={this.props.hint}
+            board={this.props.board}
+            boardHistory={this.props.boardHistory}
+            score={this.props.score}
+            isEnd={this.props.isEnd}
+            showRecordMap={this.props.showRecordMap}
+          />
+        ) : null}
       </AppLayout>
     );
   }

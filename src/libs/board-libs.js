@@ -210,13 +210,12 @@ export const playerSetNames = (state, action) => {
 };
 
 export const showRecord = (state, action) => {
-  console.log(action)
-  return{
+  const { record } = action;
+  return {
     ...state,
     pause: true,
     showRecord: true,
-    showInitialScreen: true,
-    recordBoard: action.record,
+    recordBoard: record,
   }
 };
 

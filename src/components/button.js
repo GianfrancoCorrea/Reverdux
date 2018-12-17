@@ -3,7 +3,13 @@ import React from 'react';
 import '../styles/button.css';
 
 
-function Button({ message, actions, addStyle, styleBtn }) {
+function Button({
+  message, actions, addStyle, styleBtn,
+}) {
+  Button.defaultProps = {
+    styleBtn: '',
+    addStyle: { backgoundColor: '#fafafa' },
+  };
   const className = 'btn btn--' + styleBtn;
   return (
     <div className={className} onClick={actions} style={addStyle}>
@@ -15,8 +21,8 @@ function Button({ message, actions, addStyle, styleBtn }) {
 export default Button;
 
 Button.propTypes = {
-  // handleAction: PropTypes.func.isRequired,
-  styleBtn: PropTypes.string.isRequired,
-  addStyle: PropTypes.string.isRequired,
-
+  styleBtn: PropTypes.string,
+  addStyle: PropTypes.objectOf(PropTypes.string),
+  message: PropTypes.string.isRequired,
+  actions: PropTypes.func.isRequired,
 };

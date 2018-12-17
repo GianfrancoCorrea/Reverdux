@@ -1,7 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/app-layout.css';
 
-function AppLayout({ children }) {
+function AppLayout({
+  children,
+}) {
+  AppLayout.defaultProps = {
+    children: null,
+  };
   return (
     <div className="AppLayout">
       <div>
@@ -15,3 +21,10 @@ function AppLayout({ children }) {
 }
 
 export default AppLayout;
+
+AppLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};

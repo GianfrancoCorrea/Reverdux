@@ -11,7 +11,7 @@ function Score({ players, score }) {
         <div className="score__player ">
           <div className="coin score__player--one" />
           {players.player1.name}
-          {':'}
+          {': '}
           <span>
             {score.player1}
           </span>
@@ -19,7 +19,8 @@ function Score({ players, score }) {
         <div className="score__player ">
           <div className="coin score__player--two" />
           {players.player2.name}
-          {':'}
+          {': '}
+          
           <span>
             {score.player2}
           </span>
@@ -33,6 +34,6 @@ export default Score;
 
 
 Score.propTypes = {
-  score: PropTypes.objectOf(PropTypes.object).isRequired,
+  score: PropTypes.objectOf(PropTypes.number).isRequired,
   players: PropTypes.objectOf(PropTypes.object).isRequired,
 };

@@ -4,7 +4,12 @@ import { List } from 'immutable';
 import BoardLayout from './board-layout';
 import Cell from './cell';
 
-function Board({ hint, board, actions }) {
+function Board({
+  hint, board, actions,
+}) {
+  Board.defaultProps = {
+    hint: null,
+  };
   const toHint = List(hint);
   const cell = board.map((r, x) => (
     <Cell owner={r} cell={x} key={x} isHint={toHint.includes(x)} actions={actions} />
@@ -15,7 +20,8 @@ function Board({ hint, board, actions }) {
 
 export default Board;
 
-// Board.propTypes = {
-// 	board:  PropTypes.arrayOf(PropTypes.number).isRequired,
-// 	cellClick: PropTypes.func.isRequired,
-// }
+Board.propTypes = {
+  board: PropTypes.arrayOf(PropTypes.number).isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  hint: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+};
