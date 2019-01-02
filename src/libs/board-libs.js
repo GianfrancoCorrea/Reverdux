@@ -1,7 +1,7 @@
 export const siblingsCells = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
 
 export const getCoords = (cell, param) => {
-  if (param === 'y') return Math.trunc(cell / 8);
+  if (param === 'y') { return Math.trunc(cell / 8); }
   return cell % 8;
 };
 
@@ -76,7 +76,7 @@ export const checkEnemyInDirection = (board, cell, actualPlayer, direction, stor
     const nextRow = getCoords(cell, 'y') + siblingsCells[direction][0];
     const nextCol = getCoords(cell, 'x') + siblingsCells[direction][1];
     const nextCell = getCell(nextRow, nextCol);
-    if (isOnBoardLimit(nextRow, nextCol)) return [];
+    if (isOnBoardLimit(nextRow, nextCol)) { return []; }
     return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storage);
   }
 };
@@ -201,8 +201,8 @@ export const handlerMove = (state, action) => {
 
 export const playerSetNames = (state, action) => {
   const { players } = state;
-  if (action.player === 'Player1' && action.name !== '') players.player1.name = action.name;
-  if (action.player === 'Player2' && action.name !== '') players.player2.name = action.name;
+  if (action.player === 'Player1' && action.name !== '') { players.player1.name = action.name; }
+  if (action.player === 'Player2' && action.name !== '') { players.player2.name = action.name; }
   return {
     ...state,
     players,

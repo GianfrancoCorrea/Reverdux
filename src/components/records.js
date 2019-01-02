@@ -9,29 +9,36 @@ function BoardRecords({
 }) {
   const colorBadge = (player, id) => {
     let classBadge = '';
-    if (player === 1) classBadge = 'badge badge-dark';
-    if (player === 2) classBadge = 'badge badge-light';
-    if (id === 0) classBadge = 'badge badge-info';
+    if (player === 1) { classBadge = 'badge badge-dark'; }
+    if (player === 2) { classBadge = 'badge badge-light'; }
+    if (id === 0) { classBadge = 'badge badge-info'; }
     return classBadge;
   };
+
   return (
     <div className="records">
       <div className="records__top">
         <span>Records:</span>
       </div>
 
-      <ul>
+      <div className="records__ul">
         {boardHistory.reverse().map((x, i) => (
-          <li key={i} onClick={() => actions.showRecord(x)}>
+          <div
+            key={i}
+            role="button"
+            tabIndex={-1}
+            onClick={() => actions.showRecord(x)}
+            onKeyDown={() => actions.showRecord(x)}
+          >
             <div className={colorBadge(x.player, x.id)}>
               {'#'}
               {`${x.id} - `}
               {' '}
               {x.id !== 0 ? `Move ${playerNames(players, x.player)}` : 'Start'}
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

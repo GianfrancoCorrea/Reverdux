@@ -9,12 +9,22 @@ function Cell({
   Cell.defaultProps = {
     isHint: null,
   };
-
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      actions.makeMove(cell);
+    }
+  };
   let className = ownerStyle(owner, 'board__cell');
+  if (isHint === true) { className = 'board__cell hint'; }
 
-  if (isHint === true) className = 'board__cell hint';
   return (
-    <div className={className} onClick={() => actions.makeMove(cell)}>
+    <div
+      role="button"
+      tabIndex={0}
+      className={className}
+      onClick={() => actions.makeMove(cell)}
+      onKeyDown={handleKeyDown}
+    >
       <div className="token" />
     </div>
   );

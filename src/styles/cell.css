@@ -4,6 +4,12 @@
 	border: 1px solid #bbb;
 	background: rgb(48, 148, 28);
 }
+.board__cell:focus {
+	outline: none !important;
+  -moz-box-shadow:    inset 0 0 10px 1px red;
+  -webkit-box-shadow: inset 0 0 10px 1px red;
+  box-shadow:         inset 0 0 10px 1px red;
+}
 .board__cell--player2 .token{
 	/* animation: fade 1s; */
 	background-color: white;
@@ -35,7 +41,7 @@
 	background: rgb(9, 148, 16);
 } */
 .hint {
-	-moz-box-shadow:    inset 0 0 10px 1px #2943ff;
+	 -moz-box-shadow:    inset 0 0 10px 1px #2943ff;
    -webkit-box-shadow: inset 0 0 10px 1px #2943ff;
    box-shadow:         inset 0 0 10px 1px #2943ff;
    transition: box-shadow .05s ;

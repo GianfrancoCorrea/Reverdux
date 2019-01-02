@@ -18,7 +18,7 @@
     background: white;
 }
 
-.records ul {
+.records__ul {
     height: calc(100% - 35px);
     width: 100%;
     padding: 0;
@@ -27,11 +27,11 @@
     margin-top: 0;
 }
 
-.records ul li {
+.records__ul div {
     list-style: none;
-    /* float: left; */
-    margin: 10px 0;
-    margin-left: 20px;
+    cursor: pointer;
+    margin: 2px 0;
+   
 }
 .records ul li:hover {
     cursor: pointer

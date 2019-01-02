@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../styles/score.css';
 
-
 function Score({ players, score }) {
   return (
     <div className="score">
@@ -20,7 +19,6 @@ function Score({ players, score }) {
           <div className="coin score__player--two" />
           {players.player2.name}
           {': '}
-          
           <span>
             {score.player2}
           </span>
@@ -31,7 +29,6 @@ function Score({ players, score }) {
 }
 
 export default Score;
-
 
 Score.propTypes = {
   score: PropTypes.objectOf(PropTypes.number).isRequired,

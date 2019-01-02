@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/gameActions';
+import * as gameActions from '../actions/gameActions';
 import AppLayout from '../components/app-layout';
 import GameLayout from '../components/game-layout';
 import Menu from '../components/menu';
@@ -10,36 +11,42 @@ import RecordBoard from '../components/record-board';
 
 class Game extends PureComponent {
   render() {
+    const {
+      showInitialScreen, pause, showRecord,
+      score, players, recordBoard,
+      turn, hint, board, actions,
+      winner, boardHistory, isEnd,
+    } = this.props;
     return (
       <AppLayout>
-        {this.props.showInitialScreen || (this.props.pause && !this.props.showRecord) ? (
+        {showInitialScreen || (pause && !showRecord) ? (
           <Menu
-            pause={this.props.pause}
-            show={this.props.showInitialScreen}
-            score={this.props.score}
-            players={this.props.players}
-            actions={this.props.actions}
-            showInitialScreen={this.props.showInitialScreen}
+            pause={pause}
+            show={showInitialScreen}
+            score={score}
+            players={players}
+            actions={actions}
+            showInitialScreen={showInitialScreen}
           />
         ) : null}
-        {this.props.showRecord === true ? (
-          <RecordBoard 
-            actions={this.props.actions} 
-            record={this.props.recordBoard}
-            players={this.props.players} />
+        {showRecord === true ? (
+          <RecordBoard
+            actions={actions}
+            record={recordBoard}
+            players={players}
+          />
         ) : null}
-        {!this.props.pause && !this.props.showInitialScreen && !this.props.showRecord ? (
+        {!pause && !showInitialScreen && !showRecord ? (
           <GameLayout
-            actions={this.props.actions}
-            winner={this.props.winner}
-            players={this.props.players}
-            turn={this.props.turn}
-            hint={this.props.hint}
-            board={this.props.board}
-            boardHistory={this.props.boardHistory}
-            score={this.props.score}
-            isEnd={this.props.isEnd}
-            showRecordMap={this.props.showRecordMap}
+            actions={actions}
+            winner={winner}
+            players={players}
+            turn={turn}
+            hint={hint}
+            board={board}
+            boardHistory={boardHistory}
+            score={score}
+            isEnd={isEnd}
           />
         ) : null}
       </AppLayout>
@@ -65,7 +72,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
+    actions: bindActionCreators(gameActions, dispatch),
   }),
 )(Game);
 
@@ -79,6 +86,8 @@ Game.propTypes = {
   winner: PropTypes.string.isRequired,
   hint: PropTypes.arrayOf(PropTypes.number).isRequired,
   players: PropTypes.objectOf(PropTypes.object).isRequired,
-
-  // boardHistory: PropTypes.instanceOf(Stack).isRequired
+  boardHistory: PropTypes.instanceOf(List).isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  recordBoard: PropTypes.instanceOf(Object).isRequired,
+  showRecord: PropTypes.bool.isRequired,
 };

@@ -10,9 +10,21 @@ function Button({
     styleBtn: '',
     addStyle: { backgoundColor: '#fafafa' },
   };
-  const className = 'btn btn--' + styleBtn;
+  const className = `btn btn--${styleBtn}`;
+  const handlerKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      actions();
+    }
+  };
   return (
-    <div className={className} onClick={actions} style={addStyle}>
+    <div
+      role="button"
+      tabIndex={0}
+      className={className}
+      onClick={actions}
+      onKeyDown={handlerKeyDown}
+      style={addStyle}
+    >
       {message}
     </div>
   );
