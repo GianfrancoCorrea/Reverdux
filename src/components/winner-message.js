@@ -24,9 +24,7 @@ function WinnerMessage({ actions, winner }) {
   );
 }
 
-
 export default WinnerMessage;
-
 
 WinnerMessage.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func).isRequired,

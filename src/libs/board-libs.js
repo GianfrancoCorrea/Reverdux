@@ -15,7 +15,6 @@ export const ownerStyle = (owner, className) => {
     return `${className} ${className}--player2`;
   }
   return `${className} `;
-  // ${className}--none
 };
 
 export const switchPlayer = player => (player === 1 ? 2 : 1);
