@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../styles/button.css';
 
-
 function Button({
   message, actions, addStyle, styleBtn,
 }) {
