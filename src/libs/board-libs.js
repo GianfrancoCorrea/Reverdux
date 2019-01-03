@@ -18,10 +18,10 @@ export const ownerStyle = (owner, className) => {
 };
 
 export const switchPlayer = player => (player === 1 ? 2 : 1);
-export const count = (arr, valor) => {
+export const count = (arr, value) => {
   let counter = 0;
   arr.map((currentValue, index) => {
-    if (arr[index] === valor) {
+    if (arr[index] === value) {
       counter++;
     }
   });

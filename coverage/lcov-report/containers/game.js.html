@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for containers/game.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">containers</a> game.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/18</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types';</span>
+<span class="cstat-no" title="statement not covered" >import React, { PureComponent } from 'react';</span>
+<span class="cstat-no" title="statement not covered" >import { connect } from 'react-redux';</span>
+<span class="cstat-no" title="statement not covered" >import { List } from 'immutable';</span>
+<span class="cstat-no" title="statement not covered" >import { bindActionCreators } from 'redux';</span>
+<span class="cstat-no" title="statement not covered" >import * as gameActions from '../actions/gameActions';</span>
+<span class="cstat-no" title="statement not covered" >import AppLayout from '../components/app-layout';</span>
+<span class="cstat-no" title="statement not covered" >import GameLayout from '../components/game-layout';</span>
+<span class="cstat-no" title="statement not covered" >import Menu from '../components/menu';</span>
+<span class="cstat-no" title="statement not covered" >import RecordBoard from '../components/record-board';</span>
+&nbsp;
+class Game extends PureComponent {
+  render() <span class="cstat-no" title="statement not covered" >{</span>
+    const {
+      showInitialScreen, pause, showRecord,
+      score, players, recordBoard,
+      turn, hint, board, actions,
+      winner, boardHistory, isEnd,
+    } = <span class="cstat-no" title="statement not covered" >this.props;</span>
+    const menu = <span class="cstat-no" title="statement not covered" >showInitialScreen || (pause &amp;&amp; !showRecord);</span>
+    const playing = <span class="cstat-no" title="statement not covered" >!pause &amp;&amp; !showInitialScreen &amp;&amp; !showRecord;</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;AppLayout&gt;
+        { menu &amp;&amp; (
+          &lt;Menu
+            pause={pause}
+            show={showInitialScreen}
+            score={score}
+            players={players}
+            actions={actions}
+            showInitialScreen={showInitialScreen}
+          /&gt;
+        )}
+        { showRecord &amp;&amp; (
+          &lt;RecordBoard
+            actions={actions}
+            record={recordBoard}
+            players={players}
+          /&gt;
+        )}
+        { playing &amp;&amp; (
+          &lt;GameLayout
+            actions={actions}
+            winner={winner}
+            players={players}
+            turn={turn}
+            hint={hint}
+            board={board}
+            boardHistory={boardHistory}
+            score={score}
+            isEnd={isEnd}
+          /&gt;
+        )}
+      &lt;/AppLayout&gt;
+    );
+  }
+}
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >s</span>tate =&gt; ({</span></span>
+  board: state.board,
+  turn: state.turn,
+  showInitialScreen: state.showInitialScreen,
+  score: state.score,
+  pause: state.pause,
+  isEnd: state.isEnd,
+  winner: state.winner,
+  boardHistory: state.boardHistory,
+  players: state.players,
+  hint: state.hint,
+  showRecord: state.showRecord,
+  recordBoard: state.recordBoard,
+});
+&nbsp;
+export default connect(
+  mapStateToProps,
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  dispatch =&gt; ({</span></span>
+    actions: bindActionCreators(gameActions, dispatch),
+  }),
+)(Game);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >Game.propTypes = {</span>
+  board: PropTypes.arrayOf(PropTypes.number).isRequired,
+  pause: PropTypes.bool.isRequired,
+  showInitialScreen: PropTypes.bool.isRequired,
+  turn: PropTypes.number.isRequired,
+  score: PropTypes.objectOf(PropTypes.number).isRequired,
+  isEnd: PropTypes.bool.isRequired,
+  winner: PropTypes.string.isRequired,
+  hint: PropTypes.arrayOf(PropTypes.number).isRequired,
+  players: PropTypes.objectOf(PropTypes.object).isRequired,
+  boardHistory: PropTypes.instanceOf(List).isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  recordBoard: PropTypes.instanceOf(Object).isRequired,
+  showRecord: PropTypes.bool.isRequired,
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jan 03 2019 10:26:18 GMT-0300 (Argentina Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
