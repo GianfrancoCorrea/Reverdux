@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1546521979083" clover="3.2.0">
-  <project timestamp="1546521979083" name="All files">
-    <metrics statements="301" coveredstatements="59" conditionals="115" coveredconditionals="14" methods="62" coveredmethods="16" elements="478" coveredelements="89" complexity="0" loc="301" ncloc="301" packages="5" files="19" classes="19">
+<coverage generated="1546545363059" clover="3.2.0">
+  <project timestamp="1546545363059" name="All files">
+    <metrics statements="291" coveredstatements="79" conditionals="114" coveredconditionals="41" methods="63" coveredmethods="25" elements="468" coveredelements="145" complexity="0" loc="291" ncloc="291" packages="5" files="19" classes="19">
       <package name="actions">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
         <file name="actionTypes.js" path="/home/arzion-lenovo1/Documents/Gianfranco/reverdux/src/actions/actionTypes.js">
           <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="1" type="stmt"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="5" count="1" type="stmt"/>
-          <line num="6" count="1" type="stmt"/>
-          <line num="7" count="1" type="stmt"/>
+          <line num="1" count="2" type="stmt"/>
+          <line num="2" count="2" type="stmt"/>
+          <line num="3" count="2" type="stmt"/>
+          <line num="4" count="2" type="stmt"/>
+          <line num="5" count="2" type="stmt"/>
+          <line num="6" count="2" type="stmt"/>
+          <line num="7" count="2" type="stmt"/>
         </file>
         <file name="gameActions.js" path="/home/arzion-lenovo1/Documents/Gianfranco/reverdux/src/actions/gameActions.js">
           <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
@@ -222,9 +222,9 @@
         </file>
       </package>
       <package name="libs">
-        <metrics statements="120" coveredstatements="39" conditionals="65" coveredconditionals="13" methods="29" coveredmethods="8"/>
+        <metrics statements="118" coveredstatements="55" conditionals="67" coveredconditionals="38" methods="30" coveredmethods="16"/>
         <file name="board-libs.js" path="/home/arzion-lenovo1/Documents/Gianfranco/reverdux/src/libs/board-libs.js">
-          <metrics statements="120" coveredstatements="39" conditionals="65" coveredconditionals="13" methods="29" coveredmethods="8"/>
+          <metrics statements="118" coveredstatements="55" conditionals="67" coveredconditionals="38" methods="30" coveredmethods="16"/>
           <line num="1" count="2" type="stmt"/>
           <line num="3" count="2" type="stmt"/>
           <line num="4" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -236,28 +236,28 @@
           <line num="14" count="2" type="cond" truecount="2" falsecount="0"/>
           <line num="15" count="1" type="stmt"/>
           <line num="17" count="1" type="stmt"/>
-          <line num="20" count="2" type="cond" truecount="1" falsecount="1"/>
+          <line num="20" count="2" type="cond" truecount="2" falsecount="0"/>
           <line num="21" count="2" type="stmt"/>
-          <line num="22" count="1" type="stmt"/>
-          <line num="23" count="1" type="stmt"/>
-          <line num="24" count="64" type="cond" truecount="2" falsecount="0"/>
-          <line num="25" count="4" type="stmt"/>
-          <line num="28" count="1" type="stmt"/>
+          <line num="22" count="3" type="stmt"/>
+          <line num="23" count="3" type="stmt"/>
+          <line num="24" count="192" type="cond" truecount="2" falsecount="0"/>
+          <line num="25" count="9" type="stmt"/>
+          <line num="28" count="3" type="stmt"/>
           <line num="30" count="2" type="stmt"/>
-          <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="31" count="2" type="cond" truecount="2" falsecount="0"/>
           <line num="34" count="2" type="stmt"/>
           <line num="35" count="1" type="cond" truecount="3" falsecount="0"/>
           <line num="38" count="2" type="stmt"/>
           <line num="42" count="2" type="stmt"/>
-          <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="43" count="2" type="cond" truecount="2" falsecount="0"/>
           <line num="46" count="2" type="stmt"/>
-          <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="49" count="0" type="stmt"/>
-          <line num="51" count="0" type="stmt"/>
+          <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="49" count="1" type="stmt"/>
+          <line num="51" count="1" type="stmt"/>
           <line num="54" count="2" type="stmt"/>
-          <line num="55" count="0" type="cond" truecount="0" falsecount="6"/>
-          <line num="56" count="0" type="stmt"/>
-          <line num="58" count="0" type="stmt"/>
+          <line num="55" count="4" type="cond" truecount="6" falsecount="0"/>
+          <line num="56" count="2" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
           <line num="61" count="2" type="stmt"/>
           <line num="62" count="0" type="stmt"/>
           <line num="63" count="0" type="stmt"/>
@@ -280,10 +280,10 @@
           <line num="86" count="0" type="stmt"/>
           <line num="87" count="0" type="stmt"/>
           <line num="96" count="2" type="stmt"/>
-          <line num="97" count="0" type="stmt"/>
-          <line num="98" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="97" count="2" type="stmt"/>
+          <line num="98" count="2" type="cond" truecount="3" falsecount="1"/>
           <line num="100" count="0" type="stmt"/>
-          <line num="102" count="0" type="stmt"/>
+          <line num="102" count="2" type="stmt"/>
           <line num="105" count="2" type="stmt"/>
           <line num="106" count="0" type="stmt"/>
           <line num="107" count="0" type="stmt"/>
@@ -295,68 +295,61 @@
           <line num="119" count="0" type="stmt"/>
           <line num="121" count="0" type="stmt"/>
           <line num="125" count="0" type="stmt"/>
-          <line num="128" count="2" type="cond" truecount="0" falsecount="2"/>
+          <line num="128" count="2" type="cond" truecount="2" falsecount="0"/>
           <line num="130" count="2" type="stmt"/>
           <line num="132" count="0" type="stmt"/>
-          <line num="134" count="0" type="stmt"/>
-          <line num="135" count="0" type="stmt"/>
-          <line num="137" count="0" type="stmt"/>
-          <line num="140" count="2" type="stmt"/>
+          <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="137" count="2" type="stmt"/>
+          <line num="138" count="0" type="stmt"/>
+          <line num="139" count="0" type="stmt"/>
           <line num="141" count="0" type="stmt"/>
           <line num="142" count="0" type="stmt"/>
+          <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="144" count="0" type="stmt"/>
           <line num="145" count="0" type="stmt"/>
-          <line num="146" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="147" count="0" type="stmt"/>
-          <line num="148" count="0" type="stmt"/>
+          <line num="146" count="0" type="stmt"/>
+          <line num="148" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="149" count="0" type="stmt"/>
-          <line num="151" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="152" count="0" type="stmt"/>
-          <line num="155" count="0" type="stmt"/>
-          <line num="158" count="2" type="stmt"/>
+          <line num="155" count="2" type="stmt"/>
+          <line num="156" count="0" type="stmt"/>
+          <line num="157" count="0" type="stmt"/>
+          <line num="158" count="0" type="stmt"/>
           <line num="159" count="0" type="stmt"/>
           <line num="160" count="0" type="stmt"/>
-          <line num="161" count="0" type="stmt"/>
           <line num="162" count="0" type="stmt"/>
-          <line num="163" count="0" type="stmt"/>
-          <line num="165" count="0" type="stmt"/>
+          <line num="163" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="164" count="0" type="stmt"/>
           <line num="166" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="167" count="0" type="stmt"/>
-          <line num="169" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="170" count="0" type="stmt"/>
+          <line num="168" count="0" type="stmt"/>
+          <line num="169" count="0" type="stmt"/>
           <line num="171" count="0" type="stmt"/>
           <line num="172" count="0" type="stmt"/>
-          <line num="174" count="0" type="stmt"/>
-          <line num="175" count="0" type="stmt"/>
-          <line num="181" count="0" type="stmt"/>
-          <line num="182" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="183" count="0" type="stmt"/>
-          <line num="185" count="0" type="stmt"/>
-          <line num="187" count="0" type="stmt"/>
-          <line num="198" count="0" type="stmt"/>
-          <line num="201" count="2" type="stmt"/>
-          <line num="202" count="0" type="stmt"/>
-          <line num="203" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="204" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="205" count="0" type="stmt"/>
-          <line num="211" count="2" type="stmt"/>
-          <line num="212" count="0" type="stmt"/>
-          <line num="213" count="0" type="stmt"/>
-          <line num="221" count="2" type="stmt"/>
-          <line num="232" count="2" type="stmt"/>
-          <line num="233" count="2" type="stmt"/>
+          <line num="178" count="0" type="stmt"/>
+          <line num="179" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="180" count="0" type="stmt"/>
+          <line num="182" count="0" type="stmt"/>
+          <line num="184" count="0" type="stmt"/>
+          <line num="195" count="0" type="stmt"/>
+          <line num="198" count="2" type="stmt"/>
+          <line num="199" count="3" type="stmt"/>
+          <line num="200" count="3" type="cond" truecount="4" falsecount="0"/>
+          <line num="201" count="3" type="cond" truecount="4" falsecount="0"/>
+          <line num="202" count="3" type="stmt"/>
+          <line num="208" count="2" type="stmt"/>
+          <line num="209" count="1" type="stmt"/>
+          <line num="210" count="1" type="stmt"/>
+          <line num="218" count="2" type="stmt"/>
+          <line num="229" count="2" type="stmt"/>
+          <line num="230" count="2" type="stmt"/>
         </file>
       </package>
       <package name="reducers">
-        <metrics statements="19" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="11" coveredstatements="4" conditionals="11" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <file name="game.js" path="/home/arzion-lenovo1/Documents/Gianfranco/reverdux/src/reducers/game.js">
-          <metrics statements="14" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="14" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="15" count="0" type="stmt"/>
+          <metrics statements="9" coveredstatements="2" conditionals="9" coveredconditionals="1" methods="1" coveredmethods="1"/>
+          <line num="15" count="1" type="cond" truecount="1" falsecount="7"/>
           <line num="17" count="0" type="stmt"/>
           <line num="27" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -364,15 +357,12 @@
           <line num="40" count="0" type="stmt"/>
           <line num="43" count="0" type="stmt"/>
           <line num="45" count="0" type="stmt"/>
-          <line num="47" count="0" type="stmt"/>
+          <line num="47" count="1" type="stmt"/>
         </file>
         <file name="store.js" path="/home/arzion-lenovo1/Documents/Gianfranco/reverdux/src/reducers/store.js">
-          <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
+          <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="32" count="1" type="stmt"/>
         </file>
       </package>
     </metrics>

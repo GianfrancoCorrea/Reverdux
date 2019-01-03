@@ -127,15 +127,12 @@ export const checkSiblingCell = (board, row, col, turn) => {
 
 export const changeTurn = turn => (turn === 1 ? 2 : 1);
 
-export const changeBoard = (oldBoard, cellsToFlip, turn) => {
-  // add clicked cell
-  const board = oldBoard;
-
-  cellsToFlip.map((c) => {
-    board[c] = turn;
-  });
-  return board;
-};
+export const changeBoard = (oldBoard, cellsToFlip, turn) => (
+  // return new board after click
+  oldBoard.map((c, i) => (
+    cellsToFlip.find(cell => cell === i) !== undefined ? turn : c
+  ))
+);
 
 export const hint = (turn, board) => {
   const newTurn = changeTurn(turn);
@@ -215,7 +212,7 @@ export const showRecord = (state, action) => {
     pause: true,
     showRecord: true,
     recordBoard: record,
-  }
+  };
 };
 
 export const newBoard = () => [
