@@ -11,17 +11,28 @@ const namePlayers = {
     name: 'Player2',
   },
 };
-const testBoard = [
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 1, 2, 0, 0, 0,
-  0, 0, 1, 1, 1, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-];
 
+const boards = {
+  initialBoard: [
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 1, 2, 0, 0, 0,
+    0, 0, 1, 1, 1, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+  ],
+  testBoard: [
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 1, 2, 2, 0, 0, 0,
+    1, 1, 1, 1, 1, 0, 0, 0,
+    2, 2, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0],
+};
 describe('Cells position functions', () => {
   it('should get Coords from a cell number', () => {
     const cellNumber = 19;
@@ -66,7 +77,7 @@ test('switchPlayer expects switch for player number', () => {
 });
 test('count() counts the number of times a value exists within an array', () => {
   const data = {
-    arr: testBoard,
+    arr: boards.initialBoard,
     value: 1,
   };
   expect(boardLibs.count(data.arr, data.value)).toEqual(4);
@@ -96,7 +107,7 @@ test('isGameEnd() true if some score equal to 0 or both are equal to 64', () => 
   expect(boardLibs.isGameEnd(scores)).toBe(true);
 });
 test('getScore() return score for both players', () => {
-  const board = testBoard;
+  const board = boards.initialBoard;
   const expectedReturn = {
     player1: 4,
     player2: 1,
@@ -113,7 +124,7 @@ test('playerNames() should return player name of current turn', () => {
   expect(boardLibs.playerNames(data.players, data.turn)).toEqual(namePlayers.player2.name);
 });
 test('isValidCell() should return true if cell is unowned', () => {
-  const board = testBoard;
+  const board = boards.initialBoard;
   expect(boardLibs.isValidCell(board, 26)).toBe(true);
   expect(boardLibs.isValidCell(board, 27)).toBe(false);
 });
@@ -125,7 +136,7 @@ test('isOnBoardLimit(y, x) should return true if cell is out of limit of board',
 });
 test('isEnemy() should return true if cell is owned by the other player', () => {
   const data = {
-    board: testBoard,
+    board: boards.initialBoard,
     cell: 27,
     turn: 1,
   };
@@ -161,7 +172,7 @@ describe('playerSetNames()', () => {
 describe('showRecord()', () => {
   test('should set pause & showRecord = true / set record to see', () => {
     const action = {
-      record: testBoard,
+      record: boards.initialBoard,
     };
     const expectedState = initialState;
     expectedState.pause = true;
@@ -171,12 +182,56 @@ describe('showRecord()', () => {
   });
 });
 
-/** TODO: test:
- * checkEnemyInDirection
- * searchForSiblingsCells
- * checkSiblingCell
- * changeBoard
- * hint
- * handlerMove
- *  */
+describe('searchForSiblingsCells()', () => {
+  test('souls return each sibling cell who is enemy', () => {
+    const data = {
+      clickedRow: 2,
+      clickedCol: 3,
+    };
+    expect(boardLibs.searchForSiblingsCells(data.clickedRow, data.clickedCol))
+      .toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            directionIndex: 7,
+          }),
+        ]),
+      );
+  });
+});
 
+describe('checkEnemyInDirection(board, cell, actualPlayer, direction, storageCells)', () => {
+  test('should return an array of cells to flip in a direction', () => {
+    const data = {
+      board: boards.testBoard,
+      cell: 26,
+      actualPlayer: 2,
+      direction: 5,
+      storageCells: [],
+    };
+    expect(boardLibs.checkEnemyInDirection(data.board, data.cell, data.actualPlayer, data.direction, []))
+      .toEqual(expect.arrayContaining([26, 33]));
+  });
+});
+
+describe('checkSiblingCell(board, row, col, turn)', () => {
+  test('should return all cells to flip', () => {
+    const data = {
+      board: boards.testBoard,
+      row: 3,
+      col: 1,
+      turn: 2,
+    };
+    expect(boardLibs.checkSiblingCell(data.board, data.row, data.col, data.turn))
+      .toEqual(expect.arrayContaining([26, 33]));
+  });
+});
+
+describe('hint()', () => {
+  test('should return an array with hint cells', () => {
+    const data = {
+      board: boards.initialBoard,
+      turn: 1,
+    };
+    expect(boardLibs.hint(data.turn, data.board)).toEqual([26, 42, 44]);
+  });
+});
