@@ -21,7 +21,7 @@ function GameLayout({
       {isEnd ? (
         <WinnerMessage winner={winner} actions={actions} />
       ) : (
-        <Turn players={players} turn={turn} actions={actions.switchTurn} />
+        <Turn players={players} turn={turn} actions={actions} />
       )}
       <Board
         board={board}

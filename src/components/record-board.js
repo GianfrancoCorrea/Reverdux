@@ -5,11 +5,10 @@ import Board from './board';
 import Turn from './turn';
 
 function RecordBoard({ actions, record, players }) {
-  const isRecord = true;
   return (
     <div>
       <ButtonComponent actions={actions.pause} message="Resume" styleBtn="success btn--big mb-3" />
-      <Turn turn={record.player} isRecord={isRecord} players={players} />
+      <Turn turn={record.player} actions={actions} isRecord players={players} />
       <Board
         board={record.boardState}
         actions={actions}

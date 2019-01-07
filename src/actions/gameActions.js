@@ -1,11 +1,5 @@
 import {
-  SWITCH_TURN,
-  MAKE_MOVE,
-  NEW_GAME,
-  PAUSE,
-  SHOW_RECORD,
-  PLAYER_SET_NAME,
-  RESTART_GAME,
+  SWITCH_TURN, MAKE_MOVE, NEW_GAME, PAUSE, SHOW_RECORD, PLAYER_SET_NAME, RESTART_GAME,
 } from './actionTypes';
 
 export function switchTurn() {

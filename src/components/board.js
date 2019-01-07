@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
-import BoardLayout from './board-layout';
+import '../styles/board-layout.css';
 import Cell from './cell';
 
 function Board({
@@ -15,7 +15,7 @@ function Board({
     <Cell owner={r} cell={x} key={x} isHint={toHint.includes(x)} actions={actions} />
   ));
 
-  return <BoardLayout>{cell}</BoardLayout>;
+  return <div className="board">{cell}</div>;
 }
 
 export default Board;

@@ -1,70 +1,71 @@
-import * as types from '../../actions/actionTypes';
 import * as actions from '../../actions/gameActions';
+import { initialState } from '../store';
+import game from '../game';
+import * as boardLibs from '../../libs/board-libs';
+import { List } from 'immutable';
 
-describe('actions', () => {
-  it('should create an action to make a move', () => {
-    const cell = 17;
-    const expectedAction = {
-      type: types.MAKE_MOVE,
-      cell,
-    };
-    expect(actions.makeMove(cell)).toEqual(expectedAction);
+describe('game reducer', () => {
+  const state = initialState;
+  test('should return the initial state', () => {
+    expect(game(undefined, {})).toEqual(initialState);
   });
-  it('should create an action to set player name ', () => {
-    const data = {
-      name: 'player name',
-      player: 1,
+  test('should return a state with new game', () => {
+    const expectedState = {
+      ...initialState,
+      board: boardLibs.newBoard(),
+      showInitialScreen: false,
+      score: boardLibs.getScore([1, 1, 2, 2]),
+      pause: false,
+      isEnd: false,
+      boardHistory: List([{ id: 0, boardState: boardLibs.newBoard(), player: state.turn }]),
+      hint: boardLibs.hint(boardLibs.changeTurn(state.turn), boardLibs.newBoard()),
     };
-    const expectedAction = {
-      type: types.PLAYER_SET_NAME,
-      name: data.name,
-      player: data.player,
-    };
-    expect(actions.playerName(data.name, data.player)).toEqual(expectedAction);
+    expect(game(initialState, actions.newGame())).toEqual(expectedState);
   });
-  it('should create an action to view a record', () => {
-    const record = {
-      id: 1,
-      boardState: [
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 1, 2, 0, 0, 0,
-        0, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-      ],
-      player: 1,
+  test('should switch turn', () => {
+    const expectedState = {
+      ...state,
+      turn: 2,
+      hint: boardLibs.hint(state.turn, state.board),
     };
-    const expectedAction = {
-      type: types.SHOW_RECORD,
-      record,
-    };
-    expect(actions.showRecord(record)).toEqual(expectedAction);
+    expect(game(state, actions.switchTurn())).toEqual(expectedState);
   });
-  it('should create an action to restart game', () => {
-    const expectedAction = {
-      type: types.RESTART_GAME,
+  test('should return pause', () => {
+    const expectedState = {
+      ...state,
+      pause: boardLibs.switchPause(state),
+      showRecord: false,
     };
-    expect(actions.restartGame()).toEqual(expectedAction);
+    expect(game(state, actions.pause())).toEqual(expectedState);
   });
-  it('shoueld create an action to pause the game', () => {
-    const expectedAction = {
-      type: types.PAUSE,
+  test('should return record', () => {
+    const record = {};
+    const expectedState = {
+      ...state,
+      pause: true,
+      showRecord: true,
+      recordBoard: record,
     };
-    expect(actions.pause()).toEqual(expectedAction);
+    expect(game(state, actions.showRecord(record))).toEqual(expectedState);
   });
-  it('should create an action to create a new game', () => {
-    const expectedAction = {
-      type: types.NEW_GAME,
+  test('should set player name', () => {
+    const { players } = initialState;
+    const expectedState = {
+      ...state,
+      players,
     };
-    expect(actions.newGame()).toEqual(expectedAction);
+    expect(game(state, actions.playerName(players))).toEqual(expectedState);
   });
-  it('shoueld create an action to switch turn', () => {
-    const expectedAction = {
-      type: types.SWITCH_TURN,
+  test('should return initial state (restart game)', () => {
+    const expectedState = {
+      ...initialState,
     };
-    expect(actions.switchTurn()).toEqual(expectedAction);
+    expect(game(state, actions.restartGame())).toEqual(expectedState);
+  });
+  test('should makeMove', () => {
+    const expectedState = {
+      ...state,
+    };
+    expect(game(state, actions.makeMove(1))).toEqual(expectedState);
   });
 });

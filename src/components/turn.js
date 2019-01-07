@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './button';
+import ButtonComponent from './button';
 import { playerNames } from '../libs/board-libs';
 import '../styles/turn.css';
 import '../styles/score.css';
@@ -10,7 +10,6 @@ function Turn({
 }) {
   Turn.defaultProps = {
     isRecord: false,
-    actions: () => {},
   };
 
   const btnStyle = {
@@ -32,7 +31,7 @@ function Turn({
   return !isRecord ? (
     <div className="turn">
       <div style={divStyle}>
-        <b>Turn: &nbsp;</b>
+        <b>Turn:&nbsp;</b>
         <b>
           <span>
             {' '}
@@ -42,12 +41,12 @@ function Turn({
         </b>
         <div className={coinClass} style={coinStyle} />
       </div>
-      <Button actions={actions} styleBtn="danger btn--small" addStyle={btnStyle} message="PASS" />
+      <ButtonComponent actions={actions.switchTurn} styleBtn="danger btn--small" addStyle={btnStyle} message="PASS" />
     </div>
   ) : (
     <div className="turn">
       <div style={divStyle}>
-        <b>Turn played by: &nbsp;</b>
+        <b>Turn played by:&nbsp;</b>
         <b>
           <span>
             {' '}
@@ -71,6 +70,6 @@ Turn.propTypes = {
       ),
     ),
   ).isRequired,
-  actions: PropTypes.func,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
   isRecord: PropTypes.bool,
 };

@@ -4,7 +4,7 @@ import reversiApp from './game';
 
 export const initialState = {
   board: [],
-  turn: Math.round(Math.random() * (2 - 1) + 1),
+  turn: 1,
   score: {
     player1: 0,
     player2: 0,

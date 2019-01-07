@@ -28,7 +28,6 @@ function BoardRecords({
             role="button"
             tabIndex={-1}
             onClick={() => actions.showRecord(x)}
-            onKeyDown={() => actions.showRecord(x)}
           >
             <div className={colorBadge(x.player, x.id)}>
               {'#'}

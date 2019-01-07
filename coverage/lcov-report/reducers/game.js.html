@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">22.22% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/9</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">11.11% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/9</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">22.22% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/9</span>
+        <span class='fraction'>9/9</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -108,39 +108,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,10 +158,10 @@ import {
 import * as boardLibs from '../libs/board-libs';
 import { initialState } from './store';
 &nbsp;
-function reversiApp(state = <span class="branch-0 cbranch-no" title="branch not covered" >initialState,</span> action) {
+function reversiApp(state = initialState, action) {
   switch (action.type) {
-<span class="branch-0 cbranch-no" title="branch not covered" >    case NEW_GAME:</span>
-<span class="cstat-no" title="statement not covered" >      return Object.assign({}, state, {</span>
+    case NEW_GAME:
+      return Object.assign({}, state, {
         board: boardLibs.newBoard(),
         showInitialScreen: false,
         score: boardLibs.getScore([1, 1, 2, 2]),
@@ -170,26 +170,26 @@ function reversiApp(state = <span class="branch-0 cbranch-no" title="branch not 
         boardHistory: List([{ id: 0, boardState: boardLibs.newBoard(), player: state.turn }]),
         hint: boardLibs.hint(boardLibs.changeTurn(state.turn), boardLibs.newBoard()),
       });
-<span class="branch-1 cbranch-no" title="branch not covered" >    case SWITCH_TURN:</span>
-<span class="cstat-no" title="statement not covered" >      return Object.assign({}, state, {</span>
+    case SWITCH_TURN:
+      return Object.assign({}, state, {
         turn: boardLibs.changeTurn(state.turn),
         hint: boardLibs.hint(state.turn, state.board),
       });
-<span class="branch-2 cbranch-no" title="branch not covered" >    case PAUSE:</span>
-<span class="cstat-no" title="statement not covered" >      return Object.assign({}, state, {</span>
+    case PAUSE:
+      return Object.assign({}, state, {
         pause: boardLibs.switchPause(state),
         showRecord: false,
       });
-<span class="branch-3 cbranch-no" title="branch not covered" >    case MAKE_MOVE:</span>
-<span class="cstat-no" title="statement not covered" >      return boardLibs.handlerMove(state, action);</span>
+    case MAKE_MOVE:
+      return boardLibs.handlerMove(state, action);
 &nbsp;
-<span class="branch-4 cbranch-no" title="branch not covered" >    case SHOW_RECORD:</span>
-<span class="cstat-no" title="statement not covered" >      return boardLibs.showRecord(state, action);</span>
+    case SHOW_RECORD:
+      return boardLibs.showRecord(state, action);
 &nbsp;
-<span class="branch-5 cbranch-no" title="branch not covered" >    case PLAYER_SET_NAME:</span>
-<span class="cstat-no" title="statement not covered" >      return boardLibs.playerSetNames(state, action);</span>
-<span class="branch-6 cbranch-no" title="branch not covered" >    case RESTART_GAME:</span>
-<span class="cstat-no" title="statement not covered" >      return initialState;</span>
+    case PLAYER_SET_NAME:
+      return boardLibs.playerSetNames(state, action);
+    case RESTART_GAME:
+      return initialState;
     default:
       return state;
   }
@@ -202,7 +202,7 @@ export default reversiApp;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 04 2019 16:33:47 GMT-0300 (Argentina Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 07 2019 16:53:39 GMT-0300 (Argentina Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
