@@ -1,5 +1,8 @@
 import * as boardLibs from '../board-libs';
 import { initialState } from '../../reducers/store';
+import { newGame } from '../../actions/gameActions';
+import game from '../../reducers/game';
+import Immutable from 'immutable';
 
 const namePlayers = {
   player1: {
@@ -82,6 +85,13 @@ test('count() counts the number of times a value exists within an array', () => 
   };
   expect(boardLibs.count(data.arr, data.value)).toEqual(4);
 });
+test('showinitialScreen should be false', () => {
+  const data = {
+    showinitialScreen: true,
+  };
+  expect(boardLibs.showMenu(data)).toEqual(false);
+});
+
 test('winner() should return name of winner player', () => {
   const data = {
     state: {
@@ -233,5 +243,84 @@ describe('hint()', () => {
       turn: 1,
     };
     expect(boardLibs.hint(data.turn, data.board)).toEqual([26, 42, 44]);
+  });
+});
+describe('changeBoard(OldBoard, cellsToFlip, turn)', () => {
+  test('should should return a newBoard', () => {
+    const data = {
+      board: boards.testBoard,
+      turn: 2,
+      cellsToFlip: [25, 26, 33],
+    };
+    const expectedBoard = [
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 1, 0, 0, 0, 0, 0, 0,
+      0, 2, 2, 2, 2, 0, 0, 0,
+      1, 2, 1, 1, 1, 0, 0, 0,
+      2, 2, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
+    ];
+    expect(boardLibs.changeBoard(data.board, data.cellsToFlip, data.turn))
+      .toEqual(expectedBoard);
+  });
+});
+
+describe('handlerMove()', () => {
+  test('should ', () => {
+    const action = { type: 'MAKE_MOVE', cell: 20 };
+    const state = game(initialState, newGame());
+    const expectedState = {
+      ...state,
+      board: [
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 0, 0, 0,
+        0, 0, 0, 1, 1, 0, 0, 0,
+        0, 0, 0, 2, 1, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+      ],
+      hint: [19, 21, 37],
+      winner: '',
+      score: {
+        player1: 4,
+        player2: 1,
+      },
+      turn: 2,
+      boardHistory: Immutable.List([
+        {
+          id: 0,
+          boardState: [
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 1, 2, 0, 0, 0,
+            0, 0, 0, 2, 1, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+          ],
+          player: 1,
+        },
+        {
+          id: 1,
+          boardState: [
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 1, 1, 0, 0, 0,
+            0, 0, 0, 2, 1, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+          ],
+          player: 1,
+        },
+      ]),
+    };
+    expect(boardLibs.handlerMove(state, action)).toEqual(expectedState);
   });
 });

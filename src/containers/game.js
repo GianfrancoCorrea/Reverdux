@@ -17,11 +17,12 @@ class Game extends PureComponent {
       turn, hint, board, actions,
       winner, boardHistory, isEnd,
     } = this.props;
-    const menu = showInitialScreen || (pause && !showRecord);
-    const playing = !pause && !showInitialScreen && !showRecord;
+    const displayMenu = (showInitialScreen && pause && !showRecord) || (pause && !showRecord);
+    const isPlaying = !pause && !showInitialScreen && !showRecord;
+    const displayRecord = showRecord && pause && !showInitialScreen;
     return (
       <AppLayout>
-        { menu && (
+        { displayMenu && (
           <Menu
             pause={pause}
             show={showInitialScreen}
@@ -31,14 +32,14 @@ class Game extends PureComponent {
             showInitialScreen={showInitialScreen}
           />
         )}
-        { showRecord && (
+        { displayRecord && (
           <RecordBoard
             actions={actions}
             record={recordBoard}
             players={players}
           />
         )}
-        { playing && (
+        { isPlaying && (
           <GameLayout
             actions={actions}
             winner={winner}

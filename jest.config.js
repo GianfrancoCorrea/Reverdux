@@ -5,9 +5,9 @@ module.exports = {
 
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
-  //css mocks (css imports)
+  // css mocks (css imports)
   moduleNameMapper: {
-  	'^.+\\.(css|less)$': '<rootDir>/src/__mocks__/stylesMock.js',
+    '^.+\\.(css|less)$': '<rootDir>/src/__mocks__/stylesMock.js',
   },
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: ['src/**/*.{js,jsx,mjs}'],
@@ -35,7 +35,7 @@ module.exports = {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  
+
   // Indicates whether each individual test should be reported during the run
   verbose: false,
 };

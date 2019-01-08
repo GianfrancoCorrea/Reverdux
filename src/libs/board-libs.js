@@ -62,6 +62,15 @@ export const checkEnemyInDirection = (board, cell, actualPlayer, direction, stor
   const ownerCell = board[cell];
   const enemyPlayer = switchPlayer(actualPlayer);
   const emptyCell = 0;
+  const letRecursiveCheck = () => {
+    let storage = [];
+    storage = [...storageCells, cell];
+    const nextRow = getCoords(cell, 'y') + siblingsCells[direction][0];
+    const nextCol = getCoords(cell, 'x') + siblingsCells[direction][1];
+    const nextCell = getCell(nextRow, nextCol);
+    if (isOnBoardLimit(nextRow, nextCol)) { return []; }
+    return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storage);
+  };
 
   if (ownerCell === actualPlayer) {
     return storageCells;
@@ -70,13 +79,7 @@ export const checkEnemyInDirection = (board, cell, actualPlayer, direction, stor
     return [];
   }
   if (ownerCell === enemyPlayer) {
-    let storage = [];
-    storage = [...storageCells, cell];
-    const nextRow = getCoords(cell, 'y') + siblingsCells[direction][0];
-    const nextCol = getCoords(cell, 'x') + siblingsCells[direction][1];
-    const nextCell = getCell(nextRow, nextCol);
-    if (isOnBoardLimit(nextRow, nextCol)) { return []; }
-    return checkEnemyInDirection(board, nextCell, actualPlayer, direction, storage);
+    return letRecursiveCheck();
   }
 };
 
@@ -115,9 +118,6 @@ export const checkSiblingCell = (board, row, col, turn) => {
           sibling.directionIndex,
           initialCellToFlip,
         );
-        if (cellsToFlip == null || cells == null) {
-          return false;
-        }
         cellsToFlip = [...cellsToFlip, ...cells];
       }
     }

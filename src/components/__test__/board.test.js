@@ -9,7 +9,7 @@ const data = {
   actions: { makeMove: jest.fn() },
 };
 const wrapper = mount(<Board {...data} />);
-describe('Board test suit', () => {
+describe('Board test suite', () => {
   test('should render 64 Cells components which 4 of them has .hint className', () => {
     expect(wrapper.find('.board__cell')).toHaveLength(64);
     expect(wrapper.find('.hint')).toHaveLength(4);
