@@ -10,20 +10,19 @@
     "build:dev": "webpack-dev-server --config ./webpack.dev.config.js",
     "build": "webpack",
     "build:local": "webpack --env.NODE_ENV=local",
-    "build:prod": "webpack -p --env.NODE_ENV=production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://slyhunt@bitbucket.org/slyhunt/reverdux.git"
+    "build:prod": "webpack -p --env.NODE_ENV=production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [
     "Reversi"
   ],
   "author": "GianfrancoCorrea",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/slyhunt/reverdux#readme",
+  "homepage": "https://gianfrancocorrea.github.io/Reverdux",
   "dependencies": {
     "babel-preset-stage-2": "6.24.1",
+    "gh-pages": "^2.0.1",
     "immutable": "4.0.0-rc.12",
     "lodash": "4.17.11",
     "prop-types": "15.6.2",
